@@ -183,16 +183,9 @@ function animalese(char) {
     if (!animaleseLoaded && !animaleseLoading) loadAnimalese();
     var now = ctx.currentTime;
 
-    // 先把增益拉到 0，掐断上一个声音，避免叠音
-    if (!animaleseGainNode) {
-      animaleseGainNode = ctx.createGain();
-      animaleseGainNode.connect(ctx.destination);
-    }
-    animaleseGainNode.gain.cancelScheduledValues(now);
-    animaleseGainNode.gain.setValueAtTime(0, now);
-
-    // 停掉上一个音源
+    // 断开上一个音源，然后停掉它
     if (animalesePrevSrc) {
+      try { animalesePrevSrc.disconnect(); } catch(_) {}
       try { animalesePrevSrc.stop(now); } catch(_) {}
       animalesePrevSrc = null;
     }
@@ -209,15 +202,17 @@ function animalese(char) {
       }
     }
 
+    if (!animaleseGainNode) {
+      animaleseGainNode = ctx.createGain();
+      animaleseGainNode.gain.value = 0.25;
+      animaleseGainNode.connect(ctx.destination);
+    }
+
     var src = ctx.createBufferSource();
     src.buffer = buffer;
     src.detune.value = (Math.random() * 200 - 100);
     src.connect(animaleseGainNode);
-    // 比 stop 晚一丁点启动，避免同采样点叠音
-    src.start(now + 0.003);
-    // 快速淡入，消除 click/pop
-    animaleseGainNode.gain.setValueAtTime(0, now + 0.003);
-    animaleseGainNode.gain.linearRampToValueAtTime(0.25, now + 0.012);
+    src.start(now + 0.005);
     animalesePrevSrc = src;
   } catch(e) {}
 }
