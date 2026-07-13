@@ -984,7 +984,7 @@ body {
   display: flex; flex-direction: column;
   overflow: hidden;
   /* AC triangle pattern background — using provided tile image */
-  background: url('bg-pattern.png') repeat;
+  background: #f5f0e8 url('bg-pattern.png') repeat;
   background-size: 200px 200px;
 }
 .work-detail-overlay.open { opacity: 1; pointer-events: auto; }
