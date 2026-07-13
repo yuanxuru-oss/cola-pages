@@ -182,10 +182,21 @@ function animalese(char) {
     if (ctx.state === 'suspended') { try { ctx.resume(); } catch(e) {} }
     if (!animaleseLoaded && !animaleseLoading) loadAnimalese();
     var now = ctx.currentTime;
+
+    // 先把增益拉到 0，掐断上一个声音，避免叠音
+    if (!animaleseGainNode) {
+      animaleseGainNode = ctx.createGain();
+      animaleseGainNode.connect(ctx.destination);
+    }
+    animaleseGainNode.gain.cancelScheduledValues(now);
+    animaleseGainNode.gain.setValueAtTime(0, now);
+
+    // 停掉上一个音源
     if (animalesePrevSrc) {
       try { animalesePrevSrc.stop(now); } catch(_) {}
       animalesePrevSrc = null;
     }
+
     var lower = char.toLowerCase();
     var buffer = ANIMALESE_BUFFERS[lower];
     if (!buffer) {
@@ -197,16 +208,16 @@ function animalese(char) {
         return;
       }
     }
-    if (!animaleseGainNode) {
-      animaleseGainNode = ctx.createGain();
-      animaleseGainNode.connect(ctx.destination);
-    }
-    animaleseGainNode.gain.setValueAtTime(0.25, now);
+
     var src = ctx.createBufferSource();
     src.buffer = buffer;
     src.detune.value = (Math.random() * 200 - 100);
     src.connect(animaleseGainNode);
-    src.start(now);
+    // 比 stop 晚一丁点启动，避免同采样点叠音
+    src.start(now + 0.003);
+    // 快速淡入，消除 click/pop
+    animaleseGainNode.gain.setValueAtTime(0, now + 0.003);
+    animaleseGainNode.gain.linearRampToValueAtTime(0.25, now + 0.012);
     animalesePrevSrc = src;
   } catch(e) {}
 }
