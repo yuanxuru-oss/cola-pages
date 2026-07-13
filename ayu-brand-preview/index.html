@@ -156,8 +156,9 @@ body {
 .passport-avatar {
   width: 72px; height: 72px; border-radius: 50%; border: 3px solid var(--ayu-mint);
   overflow: hidden; flex-shrink: 0; background: #e8f4d8;
-  display: flex; align-items: center; justify-content: center; font-size: 2rem;
+  display: flex; align-items: center; justify-content: center;
 }
+.passport-avatar img { width: 100%; height: 100%; object-fit: contain; }
 .passport-fields { flex: 1; display: flex; flex-direction: column; gap: 10px; }
 .passport-field label { font-size: 0.6rem; color: var(--ayu-muted); letter-spacing: 2px; text-transform: uppercase; }
 .passport-field .value { font-size: 0.85rem; color: var(--ayu-ink); font-weight: 500; padding: 3px 0; border-bottom: 1px solid #e8e6e3; }
@@ -272,6 +273,26 @@ body {
     </div>
   </div>
 
+  <!-- ===== 头像/IP形象 ===== -->
+  <div class="section">
+    <div class="section-title">🐧 头像 / IP 形象</div>
+    <div class="section-desc">品牌头像：ayu-penguin.png</div>
+    <div class="card-showcase">
+      <div style="text-align:center;">
+        <div style="width:96px;height:96px;border-radius:50%;overflow:hidden;border:3px solid var(--ayu-mint);margin:0 auto 8px;background:#e8f4d8;">
+          <img src="https://yuanxuru-oss.github.io/Ayu-websites-pages/ayu-site/ayu-penguin.png" alt="阿鱼" style="width:100%;height:100%;object-fit:contain;">
+        </div>
+        <div style="font-size:0.72rem;color:var(--ayu-muted);">圆形头像</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="width:96px;height:96px;border-radius:20px;overflow:hidden;border:2px solid var(--ayu-border);margin:0 auto 8px;background:#fff;">
+          <img src="https://yuanxuru-oss.github.io/Ayu-websites-pages/ayu-site/ayu-penguin.png" alt="阿鱼" style="width:100%;height:100%;object-fit:contain;">
+        </div>
+        <div style="font-size:0.72rem;color:var(--ayu-muted);">圆角方形</div>
+      </div>
+    </div>
+  </div>
+
   <!-- ===== Passport Card · 护照 ===== -->
   <div class="section">
     <div class="section-title">🛂 Passport Card</div>
@@ -282,7 +303,7 @@ body {
         <span class="label">DODO AIRLINES · 岛民护照</span>
       </div>
       <div class="passport-body">
-        <div class="passport-avatar">🐧</div>
+        <div class="passport-avatar"><img src="https://yuanxuru-oss.github.io/Ayu-websites-pages/ayu-site/ayu-penguin.png" alt="阿鱼" style="width:100%;height:100%;object-fit:contain;"></div>
         <div class="passport-fields">
           <div class="passport-field"><label>名字</label><div class="value">阿鱼 Ayu</div></div>
           <div class="passport-field"><label>岛屿</label><div class="value">Ayu Island 🏝️</div></div>
