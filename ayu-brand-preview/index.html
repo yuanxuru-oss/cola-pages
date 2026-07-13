@@ -3,175 +3,306 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>阿鱼 Brand Preview v2 — 品牌色预览</title>
+<title>阿鱼 Brand Preview v3 — 品牌色 + 卡片组件</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=ZCOOL+KuaiLe&display=swap');
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --ayu-mint: #19c8b9;
+  --ayu-yellow: #f7cd67;
+  --ayu-orange: #e59266;
+  --ayu-ink: #725d42;
+  --ayu-dark: #794f27;
+  --ayu-muted: #9f927d;
+  --ayu-bg: #f8f8f0;
+  --ayu-card: rgb(247,243,223);
+  --ayu-border: #c4b89e;
+  --ayu-shadow: 0 2px 4px rgba(61,52,40,0.06);
+  --ayu-shadow-lg: 0 4px 20px rgba(61,52,40,0.06), 0 8px 24px rgba(61,52,40,0.03);
+}
+
 body {
   font-family: Nunito, 'Noto Sans SC', sans-serif;
-  background: #f8f8f0;
-  color: #725d42;
+  background: var(--ayu-bg);
+  color: var(--ayu-ink);
   font-weight: 500;
   line-height: 1.6;
 }
-.container { max-width: 900px; margin: 0 auto; padding: 48px 24px; }
+.container { max-width: 960px; margin: 0 auto; padding: 48px 24px; }
 
+/* Header */
 .preview-header { text-align: center; margin-bottom: 56px; }
-.preview-badge { display: inline-block; background: #19c8b9; color: #fff; font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; padding: 6px 20px; border-radius: 50px; margin-bottom: 16px; }
-.preview-header h1 { font-family: 'ZCOOL KuaiLe', cursive; font-size: clamp(2rem, 5vw, 2.8rem); color: #794f27; margin-bottom: 8px; }
-.preview-header .sub { font-size: 0.95rem; color: #9f927d; }
+.preview-badge { display: inline-block; background: var(--ayu-mint); color: #fff; font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; padding: 6px 20px; border-radius: 50px; margin-bottom: 16px; }
+.preview-header h1 { font-family: 'ZCOOL KuaiLe', cursive; font-size: clamp(2rem, 5vw, 2.8rem); color: var(--ayu-dark); margin-bottom: 8px; }
+.preview-header .sub { font-size: 0.95rem; color: var(--ayu-muted); }
 
-.section { margin-bottom: 48px; }
-.section-title { font-family: 'ZCOOL KuaiLe', cursive; font-size: 1.4rem; color: #794f27; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-.section-title::before { content: ''; display: inline-block; width: 8px; height: 8px; background: #19c8b9; border-radius: 50%; }
+.section { margin-bottom: 56px; }
+.section-title { font-family: 'ZCOOL KuaiLe', cursive; font-size: 1.4rem; color: var(--ayu-dark); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+.section-title::before { content: ''; display: inline-block; width: 8px; height: 8px; background: var(--ayu-mint); border-radius: 50%; }
+.section-desc { font-size: 0.82rem; color: var(--ayu-muted); margin-bottom: 20px; }
 
 /* Swatches */
 .swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
-.swatch { border-radius: 20px; overflow: hidden; box-shadow: 0 2px 8px rgba(61,52,40,0.1); }
-.swatch-color { height: 110px; display: flex; align-items: flex-end; padding: 14px; }
+.swatch { border-radius: 20px; overflow: hidden; box-shadow: var(--ayu-shadow); }
+.swatch-color { height: 100px; display: flex; align-items: flex-end; padding: 14px; }
 .swatch-info { background: #fff; padding: 14px 16px; font-size: 0.8rem; }
-.swatch-info .hex { font-weight: 700; font-family: monospace; font-size: 0.85rem; color: #794f27; }
-.swatch-info .role { color: #9f927d; font-size: 0.7rem; margin-top: 3px; }
-
-/* Compare */
-.compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.compare-col { border-radius: 20px; padding: 28px; }
-.compare-old { background: #eef5fc; border: 2px solid #c8ddf0; }
-.compare-new { background: #fff; border: 2px solid #e0ddd8; box-shadow: 0 4px 16px rgba(61,52,40,0.08); }
-.compare-col h4 { font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
-.compare-old h4 { color: #2B7FD8; }
-.compare-new h4 { color: #19c8b9; }
-.compare-swatch { display: flex; gap: 10px; margin-bottom: 16px; }
-.compare-swatch span { width: 40px; height: 40px; border-radius: 50%; border: 2px solid rgba(0,0,0,0.06); }
-.compare-btn { padding: 10px 24px; border-radius: 50px; border: none; font-weight: 700; font-size: 0.82rem; cursor: pointer; }
-
-/* Typography */
-.type-sample { background: #fff; border-radius: 20px; padding: 28px 32px; box-shadow: 0 2px 8px rgba(61,52,40,0.06); margin-bottom: 14px; }
-.type-sample .label { font-size: 0.65rem; color: #9f927d; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
-.type-sample h2 { font-family: 'ZCOOL KuaiLe', cursive; font-size: 2rem; color: #794f27; margin-bottom: 4px; }
-.type-sample p { font-size: 1rem; color: #725d42; max-width: 500px; }
+.swatch-info .hex { font-weight: 700; font-family: monospace; font-size: 0.85rem; color: var(--ayu-dark); }
+.swatch-info .role { color: var(--ayu-muted); font-size: 0.7rem; margin-top: 3px; }
 
 /* Buttons */
 .btn-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
 .btn { font-family: Nunito, 'Noto Sans SC', sans-serif; font-size: 0.85rem; font-weight: 700; padding: 12px 28px; border-radius: 50px; border: none; cursor: pointer; transition: all 0.2s; }
-.btn-mint { background: #19c8b9; color: #fff; }
+.btn-mint { background: var(--ayu-mint); color: #fff; }
 .btn-mint:hover { background: #15b5a7; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(25,200,185,0.3); }
-.btn-outline { background: transparent; border: 2px solid #19c8b9; color: #19c8b9; }
-.btn-outline:hover { background: #19c8b9; color: #fff; }
-.btn-yellow { background: #f7cd67; color: #5c4a1f; border: 1.5px solid #e8be50; }
-.btn-yellow:hover { background: #f0c040; }
-.btn-orange { background: #e59266; color: #fff; }
+.btn-outline { background: transparent; border: 2px solid var(--ayu-mint); color: var(--ayu-mint); }
+.btn-outline:hover { background: var(--ayu-mint); color: #fff; }
+.btn-yellow { background: var(--ayu-yellow); color: #5c4a1f; }
+.btn-yellow:hover { background: #e8be50; }
+.btn-orange { background: var(--ayu-orange); color: #fff; }
 .btn-orange:hover { background: #d97f52; }
 
 /* Tags */
 .tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
 .tag { font-size: 0.72rem; font-weight: 700; padding: 5px 14px; border-radius: 50px; }
-.tag-mint { background: rgba(25,200,185,0.12); color: #19c8b9; }
+.tag-mint { background: rgba(25,200,185,0.12); color: var(--ayu-mint); }
 .tag-yellow { background: rgba(247,205,103,0.25); color: #8a6918; }
 .tag-orange { background: rgba(229,146,102,0.18); color: #c46e3d; }
 
-/* Card */
-.demo-card { background: #f7f3df; border-radius: 24px; padding: 32px; border: 2px solid #e0ddd8; }
-.demo-card h3 { font-family: 'ZCOOL KuaiLe', cursive; font-size: 1.2rem; color: #794f27; margin-bottom: 8px; }
-.demo-card p { font-size: 0.9rem; color: #725d42; margin-bottom: 16px; }
+/* ================================================================
+   ANIMAL-ISLAND-UI 卡片组件
+   ================================================================ */
 
-.preview-footer { text-align: center; margin-top: 64px; padding: 24px; color: #9f927d; font-size: 0.78rem; }
+/* 1. Memo Card — 画廊作品卡片 (AC Nook Miles 风格) */
+.memo-card {
+  width: 240px;
+  flex-shrink: 0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.3) 0%, transparent 60%),
+    linear-gradient(160deg, #fdf6f0 0%, #faf3e8 50%, #f5ecdd 100%);
+  border-radius: 14px;
+  box-shadow:
+    0 0 0 6px #fff,
+    0 0 0 8px rgba(180,165,140,0.15),
+    0 3px 12px rgba(61,52,40,0.10);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s;
+  display: flex;
+  flex-direction: column;
+}
+.memo-card:hover {
+  transform: scale(1.05) rotate(-1.5deg);
+  box-shadow:
+    0 0 0 6px #fff,
+    0 0 0 8px rgba(180,165,140,0.2),
+    0 6px 24px rgba(61,52,40,0.16);
+}
+.memo-card::before {
+  content: '✦';
+  position: absolute; top: 10px; right: 12px; z-index: 2;
+  font-size: 0.9rem; color: rgba(114,93,66,0.25); pointer-events: none;
+}
+.memo-img { width: 100%; height: 140px; overflow: hidden; background: #e8f4d8; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; }
+.memo-body { padding: 14px 16px 16px; flex: 1; display: flex; flex-direction: column; }
+.memo-body h3 { font-family: Nunito, 'Noto Sans SC', sans-serif; font-size: 0.9rem; font-weight: 800; color: var(--ayu-dark); margin-bottom: 4px; }
+.memo-body p { font-size: 0.75rem; color: var(--ayu-muted); line-height: 1.4; flex: 1; }
+.memo-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; }
+.memo-date { font-size: 0.7rem; color: var(--ayu-muted); }
+.memo-detail-btn {
+  font-size: 0.7rem; font-weight: 700; padding: 5px 14px;
+  border-radius: 50px; border: 1.5px solid rgba(114,93,66,0.2);
+  background: rgba(255,255,255,0.7); color: var(--ayu-ink); cursor: pointer;
+}
 
-/* Visual divider */
-.spacer { height: 1px; background: #e0ddd8; margin: 12px 0 32px; }
+/* 2. Content Card — 通用内容卡片 (sp-card 风格) */
+.content-card {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: var(--ayu-shadow-lg);
+  border: 1px solid rgba(114,93,66,0.04);
+}
+.content-card h3 { font-family: 'ZCOOL KuaiLe', cursive; font-size: 1.2rem; color: var(--ayu-dark); margin-bottom: 8px; }
+.content-card p { font-size: 0.9rem; color: var(--ayu-ink); line-height: 1.7; margin-bottom: 16px; }
 
-/* Color contrast demo - show on white bg vs on card bg */
-.contrast-row { display: flex; gap: 16px; flex-wrap: wrap; }
-.contrast-block { flex: 1; min-width: 160px; padding: 20px; border-radius: 16px; text-align: center; }
-.contrast-block .dot { width: 48px; height: 48px; border-radius: 50%; margin: 0 auto 10px; border: 2px solid rgba(0,0,0,0.05); }
-.contrast-block .label { font-size: 0.7rem; font-weight: 700; }
+/* 3. Widget Card — 侧边栏小组件 (sp-widget 风格) */
+.widget-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 20px 22px;
+  box-shadow: var(--ayu-shadow-lg);
+}
+.widget-card h4 { font-family: Nunito, 'Noto Sans SC', sans-serif; font-size: 0.72rem; font-weight: 700; color: var(--ayu-muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+.widget-card .stat { font-family: Nunito, sans-serif; font-size: 1.6rem; font-weight: 800; color: var(--ayu-dark); }
+.widget-card .stat-label { font-size: 0.62rem; color: var(--ayu-muted); letter-spacing: 1px; }
+
+/* 4. Passport Card — 护照/身份卡片 */
+.passport-card {
+  background: var(--ayu-card);
+  border-radius: 20px;
+  box-shadow: var(--ayu-shadow);
+  overflow: hidden;
+  max-width: 480px;
+}
+.passport-header {
+  background: var(--ayu-mint);
+  padding: 12px 20px;
+  display: flex; align-items: center; gap: 8px;
+}
+.passport-header .icon { font-size: 1.2rem; }
+.passport-header .label { color: #fff; font-family: 'ZCOOL KuaiLe', cursive; font-size: 0.85rem; }
+.passport-body { display: flex; gap: 20px; padding: 20px; }
+.passport-avatar {
+  width: 72px; height: 72px; border-radius: 50%; border: 3px solid var(--ayu-mint);
+  overflow: hidden; flex-shrink: 0; background: #e8f4d8;
+  display: flex; align-items: center; justify-content: center; font-size: 2rem;
+}
+.passport-fields { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+.passport-field label { font-size: 0.6rem; color: var(--ayu-muted); letter-spacing: 2px; text-transform: uppercase; }
+.passport-field .value { font-size: 0.85rem; color: var(--ayu-ink); font-weight: 500; padding: 3px 0; border-bottom: 1px solid #e8e6e3; }
+
+/* Card showcase layout */
+.card-showcase { display: flex; gap: 24px; flex-wrap: wrap; align-items: flex-start; }
+
+/* Typography */
+.type-sample { background: #fff; border-radius: 20px; padding: 28px 32px; box-shadow: var(--ayu-shadow); margin-bottom: 14px; }
+.type-sample .label { font-size: 0.65rem; color: var(--ayu-muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+.type-sample h2 { font-family: 'ZCOOL KuaiLe', cursive; font-size: 2rem; color: var(--ayu-dark); margin-bottom: 4px; }
+.type-sample p { font-size: 1rem; color: var(--ayu-ink); max-width: 500px; }
+
+.preview-footer { text-align: center; margin-top: 64px; padding: 24px; color: var(--ayu-muted); font-size: 0.78rem; }
 </style>
 </head>
 <body>
 
 <div class="container">
   <div class="preview-header">
-    <div class="preview-badge">🐧 BRAND PREVIEW v2</div>
-    <h1>阿鱼 · 品牌色预览</h1>
-    <p class="sub">三色更鲜明 — 薄荷绿 · 阳光黄 · 蜜柑橙</p>
+    <div class="preview-badge">🐧 BRAND PREVIEW v3</div>
+    <h1>阿鱼 · 品牌色 + 卡片组件</h1>
+    <p class="sub">品牌三色 + animal-island-ui 卡片组件库</p>
   </div>
 
-  <!-- ===== 1. 品牌三色 ===== -->
+  <!-- ===== 品牌三色 ===== -->
   <div class="section">
-    <div class="section-title">🎨 IP 三色（新版）</div>
+    <div class="section-title">🎨 IP 三色</div>
     <div class="swatch-grid">
-      <div class="swatch">
-        <div class="swatch-color" style="background:#19c8b9;"></div>
-        <div class="swatch-info">
-          <div class="hex">#19C8B9</div>
-          <div class="role">主色 · 薄荷绿 — 标题、链接、主按钮</div>
-        </div>
-      </div>
-      <div class="swatch">
-        <div class="swatch-color" style="background:#f7cd67;"></div>
-        <div class="swatch-info">
-          <div class="hex">#F7CD67</div>
-          <div class="role">强调色 · 阳光黄 — 高亮、徽章、装饰</div>
-        </div>
-      </div>
-      <div class="swatch">
-        <div class="swatch-color" style="background:#e59266;"></div>
-        <div class="swatch-info">
-          <div class="hex">#E59266</div>
-          <div class="role">点缀色 · 蜜柑橙 — 标签、CTA、点缀</div>
-        </div>
-      </div>
+      <div class="swatch"><div class="swatch-color" style="background:var(--ayu-mint);"></div><div class="swatch-info"><div class="hex">#19C8B9</div><div class="role">主色 · 薄荷绿</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:var(--ayu-yellow);"></div><div class="swatch-info"><div class="hex">#F7CD67</div><div class="role">强调色 · 阳光黄</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:var(--ayu-orange);"></div><div class="swatch-info"><div class="hex">#E59266</div><div class="role">点缀色 · 蜜柑橙</div></div></div>
     </div>
-    <div class="spacer"></div>
-    <p style="font-size:0.82rem;color:#9f927d;">暖米 #F7F3DF 退居背景/卡片底工具色，不作为品牌三色</p>
   </div>
 
-  <!-- ===== 2. 对比 ===== -->
+  <!-- ===== Memo Card · 画廊风格 ===== -->
   <div class="section">
-    <div class="section-title">🔄 对比：Esther → v1（暖米）→ v2（鲜明）</div>
-    <div class="compare-grid">
-      <div class="compare-col compare-old">
-        <h4>❌ Esther 原版</h4>
-        <div class="compare-swatch">
-          <span style="background:#2B7FD8;"></span>
-          <span style="background:#F4D758;"></span>
-          <span style="background:#E84A5F;"></span>
+    <div class="section-title">🃏 Memo Card</div>
+    <div class="section-desc">画廊作品卡片 · AC Nook Miles 拍立得风格 · 白框 + 暖渐变底 + ✦ 印章 + 悬停倾斜</div>
+    <div class="card-showcase">
+      <div class="memo-card">
+        <div class="memo-img">🎨</div>
+        <div class="memo-body">
+          <h3>丝路远航</h3>
+          <p>融合福建海洋文化与现代创意的IP形象</p>
+          <div class="memo-footer">
+            <span class="memo-date">2025.10</span>
+            <button class="memo-detail-btn">作品详情 ▸</button>
+          </div>
         </div>
-        <p style="font-size:0.8rem;color:#4A5568;margin-bottom:12px;">蓝 · 金 · 红</p>
       </div>
-      <div class="compare-col" style="background:#fff;border:2px solid #f7f3df;border-radius:20px;padding:28px;">
-        <h4 style="color:#19c8b9;font-size:0.72rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;">✅ 阿鱼 v2</h4>
-        <div class="compare-swatch">
-          <span style="background:#19c8b9;"></span>
-          <span style="background:#f7cd67;"></span>
-          <span style="background:#e59266;"></span>
+      <div class="memo-card">
+        <div class="memo-img">🌟</div>
+        <div class="memo-body">
+          <h3>双子星·刺桐</h3>
+          <p>非遗文化IP形象设计</p>
+          <div class="memo-footer">
+            <span class="memo-date">2025.10</span>
+            <button class="memo-detail-btn">作品详情 ▸</button>
+          </div>
         </div>
-        <p style="font-size:0.8rem;color:#725d42;margin-bottom:12px;">薄荷 · 阳光黄 · 蜜柑橙</p>
+      </div>
+      <div class="memo-card" style="opacity:0.6;">
+        <div class="memo-img" style="font-size:1.8rem;">📸</div>
+        <div class="memo-body">
+          <h3>更多创作中…</h3>
+          <p>新的插画和设计作品正在路上</p>
+          <div class="memo-footer">
+            <span class="memo-date">…</span>
+            <button class="memo-detail-btn" disabled>敬请期待</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- ===== 3. 字体 ===== -->
+  <!-- ===== Content Card · 通用内容 ===== -->
+  <div class="section">
+    <div class="section-title">📄 Content Card</div>
+    <div class="section-desc">通用内容卡片 · 白底 + 24px 圆角 + 双层暖阴影</div>
+    <div class="content-card">
+      <h3>关于阿鱼</h3>
+      <p>插画师 / 非遗文化创作者。用温暖的笔触讲述福建海洋故事，将传统文化融入现代IP设计。</p>
+      <div class="tag-row">
+        <span class="tag tag-mint">插画</span>
+        <span class="tag tag-yellow">非遗</span>
+        <span class="tag tag-orange">IP设计</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Widget Card · 侧边栏 ===== -->
+  <div class="section">
+    <div class="section-title">📊 Widget Card</div>
+    <div class="section-desc">侧边栏小组件 · 白底 + 20px 圆角 + 统计数字</div>
+    <div class="card-showcase">
+      <div class="widget-card" style="width:200px;">
+        <h4>作品统计</h4>
+        <div class="stat">12</div>
+        <div class="stat-label">完成作品</div>
+      </div>
+      <div class="widget-card" style="width:200px;">
+        <h4>收藏夹</h4>
+        <div class="stat">🌟 48</div>
+        <div class="stat-label">灵感收藏</div>
+      </div>
+      <div class="widget-card" style="width:200px;">
+        <h4>今日状态</h4>
+        <div style="font-size:0.82rem;color:var(--ayu-ink);">☕ 创作中…</div>
+        <div style="font-size:0.68rem;color:var(--ayu-muted);">下午 2:30</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Passport Card · 护照 ===== -->
+  <div class="section">
+    <div class="section-title">🛂 Passport Card</div>
+    <div class="section-desc">护照/身份卡片 · 暖米底 + 薄荷绿头栏 + 圆形头像</div>
+    <div class="passport-card">
+      <div class="passport-header">
+        <span class="icon">✈️</span>
+        <span class="label">DODO AIRLINES · 岛民护照</span>
+      </div>
+      <div class="passport-body">
+        <div class="passport-avatar">🐧</div>
+        <div class="passport-fields">
+          <div class="passport-field"><label>名字</label><div class="value">阿鱼 Ayu</div></div>
+          <div class="passport-field"><label>岛屿</label><div class="value">Ayu Island 🏝️</div></div>
+          <div class="passport-field"><label>签名</label><div class="value">用画笔讲故事 ✨</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 字体 ===== -->
   <div class="section">
     <div class="section-title">🔤 字体系统</div>
-    <div class="type-sample">
-      <div class="label">中文标题 · ZCOOL KuaiLe</div>
-      <h2>欢迎来到阿鱼的小岛 🏝️</h2>
-    </div>
-    <div class="type-sample">
-      <div class="label">英文标题 · Nunito 800</div>
-      <h2 style="font-family:Nunito,sans-serif;font-weight:800;">Welcome to Ayu Island</h2>
-    </div>
-    <div class="type-sample">
-      <div class="label">正文 · Nunito + Noto Sans SC</div>
-      <p>新的插画和设计作品正在路上。丝路远航是融合福建深厚海洋文化与现代创意的IP形象。</p>
-    </div>
+    <div class="type-sample"><div class="label">中文标题 · ZCOOL KuaiLe</div><h2>欢迎来到阿鱼的小岛 🏝️</h2></div>
+    <div class="type-sample"><div class="label">英文标题 · Nunito 800</div><h2 style="font-family:Nunito,sans-serif;font-weight:800;">Welcome to Ayu Island</h2></div>
+    <div class="type-sample"><div class="label">正文 · Nunito + Noto Sans SC</div><p>新的插画和设计作品正在路上。丝路远航是融合福建深厚海洋文化与现代创意的IP形象。</p></div>
   </div>
 
-  <!-- ===== 4. 按钮 ===== -->
+  <!-- ===== 按钮 ===== -->
   <div class="section">
-    <div class="section-title">🔘 按钮</div>
+    <div class="section-title">🔘 按钮 (Pill 50px)</div>
     <div class="btn-row">
       <button class="btn btn-mint">主按钮 · 薄荷</button>
       <button class="btn btn-outline">边框按钮</button>
@@ -180,57 +311,9 @@ body {
     </div>
   </div>
 
-  <!-- ===== 5. 标签 ===== -->
-  <div class="section">
-    <div class="section-title">🏷️ 标签</div>
-    <div class="tag-row">
-      <span class="tag tag-mint">非遗</span>
-      <span class="tag tag-yellow">IP</span>
-      <span class="tag tag-orange">插画</span>
-      <span class="tag tag-mint">设计</span>
-      <span class="tag tag-orange">动森风</span>
-    </div>
+  <div class="preview-footer">
+    🐧 ayu-design-system · 品牌三色 + animal-island-ui 卡片组件
   </div>
-
-  <!-- ===== 6. 卡片 ===== -->
-  <div class="section">
-    <div class="section-title">🃏 卡片（暖米底）</div>
-    <div class="demo-card">
-      <h3>丝路远航</h3>
-      <p>"丝路远航"是融合福建深厚海洋文化与现代创意的IP形象。云澜与远帆，一个承载历史，一个诠释当下。</p>
-      <div class="tag-row">
-        <span class="tag tag-mint">插画</span>
-        <span class="tag tag-yellow">非遗</span>
-        <span class="tag tag-orange">IP</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== 7. 对比度验证 ===== -->
-  <div class="section">
-    <div class="section-title">👁️ 对比度验证：白底 vs 暖米底</div>
-    <div class="contrast-row">
-      <div class="contrast-block" style="background:#fff;">
-        <p style="font-size:0.65rem;color:#9f927d;margin-bottom:12px;">白底 #FFF</p>
-        <div class="dot" style="background:#f7cd67;"></div><div class="label" style="color:#8a6918;">阳光黄</div>
-      </div>
-      <div class="contrast-block" style="background:#f7f3df;">
-        <p style="font-size:0.65rem;color:#9f927d;margin-bottom:12px;">暖米底 #F7F3DF</p>
-        <div class="dot" style="background:#f7cd67;"></div><div class="label" style="color:#8a6918;">阳光黄</div>
-      </div>
-      <div class="contrast-block" style="background:#fff;">
-        <p style="font-size:0.65rem;color:#9f927d;margin-bottom:12px;">白底 #FFF</p>
-        <div class="dot" style="background:#e59266;"></div><div class="label" style="color:#c46e3d;">蜜柑橙</div>
-      </div>
-      <div class="contrast-block" style="background:#f7f3df;">
-        <p style="font-size:0.65rem;color:#9f927d;margin-bottom:12px;">暖米底 #F7F3DF</p>
-        <div class="dot" style="background:#e59266;"></div><div class="label" style="color:#c46e3d;">蜜柑橙</div>
-      </div>
-    </div>
-    <p style="font-size:0.78rem;color:#9f927d;margin-top:16px;">三个品牌色在白色和暖米色底上都清晰可辨 ✅</p>
-  </div>
-
-  <div class="preview-footer">🐧 ayu-design-system Brand Preview v2 · 组件库: animal-island-ui</div>
 </div>
 </body>
 </html>
