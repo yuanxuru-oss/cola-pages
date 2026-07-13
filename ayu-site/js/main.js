@@ -159,8 +159,8 @@ function loadAnimalese() {
     xhr.responseType = 'arraybuffer';
     xhr.onload = (function(letter) {
       return function() {
-        if (xhr.status === 200 || xhr.status === 0) {
-          ctx.decodeAudioData(xhr.response, function(audio) {
+        if (this.status === 200 || this.status === 0) {
+          ctx.decodeAudioData(this.response, function(audio) {
             ANIMALESE_BUFFERS[letter] = audio;
             loaded++;
             if (loaded >= letters.length) animaleseLoaded = true;
@@ -182,14 +182,10 @@ function animalese(char) {
     if (ctx.state === 'suspended') { try { ctx.resume(); } catch(e) {} }
     if (!animaleseLoaded && !animaleseLoading) loadAnimalese();
     var now = ctx.currentTime;
-
-    // 断开上一个音源，然后停掉它
     if (animalesePrevSrc) {
-      try { animalesePrevSrc.disconnect(); } catch(_) {}
       try { animalesePrevSrc.stop(now); } catch(_) {}
       animalesePrevSrc = null;
     }
-
     var lower = char.toLowerCase();
     var buffer = ANIMALESE_BUFFERS[lower];
     if (!buffer) {
@@ -201,18 +197,16 @@ function animalese(char) {
         return;
       }
     }
-
     if (!animaleseGainNode) {
       animaleseGainNode = ctx.createGain();
-      animaleseGainNode.gain.value = 0.25;
       animaleseGainNode.connect(ctx.destination);
     }
-
+    animaleseGainNode.gain.setValueAtTime(0.25, now);
     var src = ctx.createBufferSource();
     src.buffer = buffer;
     src.detune.value = (Math.random() * 200 - 100);
     src.connect(animaleseGainNode);
-    src.start(now + 0.005);
+    src.start(now);
     animalesePrevSrc = src;
   } catch(e) {}
 }
