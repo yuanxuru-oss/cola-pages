@@ -1,0 +1,76 @@
+{
+  "hero": {
+    "hint": "点一下阿鱼跟我说话吧！",
+    "title": "阿鱼的小岛",
+    "subtitle": "AI Creator & Designer · 安静做事，作品说话",
+    "greetings": [
+      "欢迎来到<strong>阿鱼的小岛</strong>！你想去哪里看看？",
+      "今天天气真好呀！要逛逛吗？",
+      "嘿！<strong>好久不见</strong>～想去哪儿？",
+      "阿鱼在岛上留了些东西，要看看吗？"
+    ]
+  },
+  "passport": {
+    "name": "阿鱼 · Ayu",
+    "island": "鱼骨岛 · Fishbone Isle",
+    "role": "AI Creator & Designer",
+    "motto": "想做却不敢做的事，你一定要做。"
+  },
+  "projects": [
+    {
+      "id": "proj-fishbone",
+      "title": "🐟 鱼骨头英语复习系统",
+      "tags": ["Web App", "教育"],
+      "desc": "通用英语复习工具。听力、阅读、翻译、词汇、闪卡多模块训练。手绘纸质感UI。",
+      "link": "https://yuanxuru-oss.github.io/English-systems/review-system/",
+      "linkText": "打开项目 →"
+    },
+    {
+      "id": "proj-ai-system",
+      "title": "📋 个人 AI 工作系统",
+      "tags": ["AI 系统", "工作流"],
+      "desc": "五层架构AI搭档。CLAUDE.md + Skill + 日记记忆层。开工/存档每日循环。",
+      "link": "https://github.com/yuanxuru-oss",
+      "linkText": "GitHub →"
+    },
+    {
+      "id": "proj-website",
+      "title": "🌐 阿鱼个人网页",
+      "tags": ["个人站点", "动森风"],
+      "desc": "你现在看到的这个网站。企鹅岛民互动式个人名片。",
+      "link": "",
+      "linkText": "你就在这里 →"
+    }
+  ],
+  "competitions": [
+    {
+      "id": "comp-1",
+      "title": "🏅 AI 创新挑战赛",
+      "tags": ["竞赛", "AI"],
+      "desc": "参与 AI 应用开发竞赛，用创意和技术解决实际问题。",
+      "status": "进行中 →"
+    },
+    {
+      "id": "comp-2",
+      "title": "🎯 创意设计马拉松",
+      "tags": ["竞赛", "设计"],
+      "desc": "48小时极限创作挑战，从概念到原型一气呵成。",
+      "status": "敬请期待"
+    },
+    {
+      "id": "comp-3",
+      "title": "更多挑战筹备中…",
+      "tags": ["Coming Soon"],
+      "desc": "新的竞赛项目正在规划，保持关注。",
+      "status": "✨"
+    }
+  ],
+  "socialLinks": [
+    {
+      "platform": "邮箱",
+      "url": "mailto:924386950@qq.com",
+      "icon": "✉️",
+      "hint": "924386950@qq.com"
+    }
+  ]
+}

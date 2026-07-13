@@ -1,0 +1,17 @@
+{
+  "hero": {
+    "hint": "点一下阿鱼跟我说话吧！",
+    "title": "",
+    "subtitle": "",
+    "greetings": []
+  },
+  "passport": {
+    "name": "",
+    "island": "",
+    "role": "",
+    "motto": ""
+  },
+  "projects": [],
+  "competitions": [],
+  "socialLinks": []
+}

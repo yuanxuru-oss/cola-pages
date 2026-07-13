@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>阿鱼小岛管理后台</title>
+<link rel="stylesheet" href="css/admin.css?v=2">
+</head>
+<body>
+
+<div class="admin-container">
+  <div class="admin-header">
+    <img src="ayu-penguin.png" alt="阿鱼">
+    <h1>🐧 阿鱼小岛管理后台</h1>
+    <p>统一编辑站点内容 · 一键部署</p>
+  </div>
+
+  <!-- Tab bar -->
+  <div class="tab-bar">
+    <button class="tab-btn active" data-tab="site">站点信息</button>
+    <button class="tab-btn" data-tab="passport">护照</button>
+    <button class="tab-btn" data-tab="workshop">工坊</button>
+    <button class="tab-btn" data-tab="gallery">画廊</button>
+    <button class="tab-btn" data-tab="competitions">竞赛</button>
+    <button class="tab-btn" data-tab="social">社交</button>
+  </div>
+
+  <!-- === TAB 1: 站点信息 === -->
+  <div class="tab-content active" id="tab-site">
+    <div class="form-card">
+      <h2>🏝️ 站点信息</h2>
+      <div class="form-group">
+        <label>Header 提示文字</label>
+        <input type="text" id="heroHint" placeholder="点一下企鹅跟我说话吧" maxlength="40">
+      </div>
+      <div class="form-group">
+        <label>站点标题</label>
+        <input type="text" id="heroTitle" placeholder="阿鱼的小岛" maxlength="30">
+      </div>
+      <div class="form-group">
+        <label>副标题</label>
+        <input type="text" id="heroSubtitle" placeholder="AI Creator & Designer" maxlength="60">
+      </div>
+      <div class="form-group">
+        <label>欢迎语列表（一行一句，随机滚动）</label>
+        <textarea id="heroGreetings" placeholder="欢迎来到阿鱼的小岛！&#10;今天天气真好呀！" rows="4"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- === TAB 2: 护照 === -->
+  <div class="tab-content" id="tab-passport">
+    <div class="form-card">
+      <h2>📋 岛民护照</h2>
+      <div class="form-group">
+        <label>Name / 名字</label>
+        <input type="text" id="pfName" placeholder="阿鱼 · Ayu" maxlength="30">
+      </div>
+      <div class="form-group">
+        <label>Island / 岛屿</label>
+        <input type="text" id="pfIsland" placeholder="鱼骨岛 · Fishbone Isle" maxlength="40">
+      </div>
+      <div class="form-group">
+        <label>Role / 角色</label>
+        <input type="text" id="pfRole" placeholder="AI Creator & Designer" maxlength="40">
+      </div>
+      <div class="form-group">
+        <label>Motto / 座右铭</label>
+        <textarea id="pfMotto" placeholder="想做却不敢做的事，你一定要做。" rows="2" maxlength="100"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- === TAB 3: 工坊 === -->
+  <div class="tab-content" id="tab-workshop">
+    <div class="add-section">
+      <button class="add-toggle" id="workshopAddToggle">＋ 添加项目</button>
+    </div>
+    <div class="form-card" id="workshopAddForm" style="display:none">
+      <h2 id="workshopFormTitle">添加项目</h2>
+      <input type="hidden" id="workshopEditId">
+      <div class="form-group">
+        <label>项目标题</label>
+        <input type="text" id="workshopTitle" placeholder="例如：🐟 鱼骨头英语复习系统" maxlength="40">
+      </div>
+      <div class="form-group">
+        <label>标签（逗号分隔）</label>
+        <input type="text" id="workshopTags" placeholder="Web App, 教育" maxlength="60">
+      </div>
+      <div class="form-group">
+        <label>描述</label>
+        <textarea id="workshopDesc" placeholder="简短描述项目" rows="2" maxlength="150"></textarea>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>链接 URL</label>
+          <input type="text" id="workshopLink" placeholder="https://...">
+        </div>
+        <div class="form-group">
+          <label>链接文字</label>
+          <input type="text" id="workshopLinkText" placeholder="打开项目 →" maxlength="20">
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn" onclick="cancelWorkshopForm()">取消</button>
+        <button class="btn btn-primary" onclick="saveWorkshopItem()">保存</button>
+      </div>
+    </div>
+    <div id="workshopList"></div>
+  </div>
+
+  <!-- === TAB 4: 画廊 === -->
+  <div class="tab-content" id="tab-gallery">
+    <div class="form-card">
+      <h2 id="galleryFormTitle">添加新作品</h2>
+      <input type="hidden" id="workId">
+      <div class="form-group">
+        <label>作品名称 · TITLE</label>
+        <input type="text" id="workTitle" placeholder="例如：双子星·福建泉州IP设计" maxlength="40">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>日期 · DATE</label>
+          <input type="text" id="workDate" placeholder="2026.05" maxlength="10">
+        </div>
+        <div class="form-group">
+          <label>首图 · MAIN IMAGE（上传或填写路径）</label>
+          <div class="img-upload-area">
+            <input type="file" id="workImgFile" accept="image/*" onchange="previewMainImage()">
+            <div class="img-preview" id="imgPreview">预览</div>
+          </div>
+          <input type="text" id="workImg" placeholder="或填写图片路径 works/xxx.png" maxlength="200" style="margin-top:6px;font-size:0.75rem">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>标签 · TAGS（回车添加）</label>
+        <div class="tag-input-container" id="tagContainer">
+          <input type="text" id="tagInput" placeholder="输入标签后回车…">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>简介 · SUMMARY（画廊卡片上的简短描述）</label>
+        <textarea id="workSummary" placeholder="一句话描述作品" rows="2" maxlength="60"></textarea>
+      </div>
+      <div class="form-group">
+        <label>详情描述 · DESCRIPTION（支持多段文字）</label>
+        <textarea id="workDesc" placeholder="作品的详细描述…" rows="4"></textarea>
+      </div>
+      <div class="form-group">
+        <label>详情图片 · EXTRA IMAGES（可选，展示在详情描述下方）</label>
+        <input type="file" id="extraImgInput" accept="image/*" multiple onchange="addExtraImages()" style="margin-bottom:6px">
+        <div class="extra-images-list" id="extraImagesList"></div>
+      </div>
+      <div class="btn-row">
+        <button class="btn" onclick="resetGalleryForm()">清空</button>
+        <button class="btn btn-primary" onclick="saveWork()">保存作品</button>
+      </div>
+    </div>
+    <div id="workListContainer"></div>
+  </div>
+
+  <!-- === TAB 5: 竞赛 === -->
+  <div class="tab-content" id="tab-competitions">
+    <div class="add-section">
+      <button class="add-toggle" id="compAddToggle">＋ 添加竞赛</button>
+    </div>
+    <div class="form-card" id="compAddForm" style="display:none">
+      <h2 id="compFormTitle">添加竞赛</h2>
+      <input type="hidden" id="compEditId">
+      <div class="form-group">
+        <label>竞赛标题</label>
+        <input type="text" id="compTitle" placeholder="例如：🏅 AI 创新挑战赛" maxlength="40">
+      </div>
+      <div class="form-group">
+        <label>标签（逗号分隔）</label>
+        <input type="text" id="compTags" placeholder="竞赛, AI" maxlength="60">
+      </div>
+      <div class="form-group">
+        <label>描述</label>
+        <textarea id="compDesc" placeholder="简述竞赛内容" rows="2" maxlength="150"></textarea>
+      </div>
+      <div class="form-group">
+        <label>状态</label>
+        <input type="text" id="compStatus" placeholder="进行中 / 敬请期待 / ✨" maxlength="20">
+      </div>
+      <div class="btn-row">
+        <button class="btn" onclick="cancelCompForm()">取消</button>
+        <button class="btn btn-primary" onclick="saveCompItem()">保存</button>
+      </div>
+    </div>
+    <div id="compList"></div>
+  </div>
+
+  <!-- === TAB 6: 社交 === -->
+  <div class="tab-content" id="tab-social">
+    <div class="add-section">
+      <button class="add-toggle" id="socialAddToggle">＋ 添加社交链接</button>
+    </div>
+    <div class="form-card" id="socialAddForm" style="display:none">
+      <h2 id="socialFormTitle">添加社交链接</h2>
+      <input type="hidden" id="socialEditId">
+      <div class="form-group">
+        <label>平台名称</label>
+        <input type="text" id="socialPlatform" placeholder="GitHub" maxlength="20">
+      </div>
+      <div class="form-group">
+        <label>链接 URL</label>
+        <input type="text" id="socialUrl" placeholder="https://...">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>图标 Emoji</label>
+          <input type="text" id="socialIcon" placeholder="🐙" maxlength="4">
+        </div>
+        <div class="form-group">
+          <label>提示文字</label>
+          <input type="text" id="socialHint" placeholder="代码仓库" maxlength="20">
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn" onclick="cancelSocialForm()">取消</button>
+        <button class="btn btn-primary" onclick="saveSocialItem()">保存</button>
+      </div>
+    </div>
+    <div id="socialList"></div>
+  </div>
+
+  <!-- === Footer bar === -->
+  <div class="footer-bar">
+    <button class="btn btn-primary" onclick="saveAll()">💾 保存全部</button>
+    <button class="btn" onclick="exportAll()">📦 导出数据</button>
+    <button class="btn" onclick="deployInfo()">🚀 部署到线上</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/admin.js?v=2"></script>
+</body>
+</html>
