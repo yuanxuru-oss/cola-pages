@@ -3,437 +3,305 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>阿鱼的小岛 · 改进预览</title>
-
-<!-- OG Tags -->
+<title>阿鱼 · Ayu — Welcome to My Island</title>
+<meta name="description" content="阿鱼（Ayu）的个人作品集网站。插画师、IP设计师，专注非遗文化与现代创意融合。动森小岛治愈风格。">
 <meta property="og:title" content="阿鱼 Ayu | 插画师 · IP设计师">
 <meta property="og:description" content="用温暖笔触讲非遗故事。动森小岛风作品集。">
 <meta property="og:image" content="https://yuanxuru-oss.github.io/Ayu-websites-pages/ayu-site/ayu-penguin.png">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary">
-
-<!-- Favicon -->
 <link rel="icon" type="image/png" href="https://yuanxuru-oss.github.io/Ayu-websites-pages/ayu-site/ayu-penguin.png">
 <link rel="apple-touch-icon" href="https://yuanxuru-oss.github.io/Ayu-websites-pages/ayu-site/ayu-penguin.png">
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
-
 <style>
-/* ===== CSS Variables — 阿鱼品牌 ===== */
+/* ================================================================
+   CSS Variables — 阿鱼品牌 (ayu-design-system)
+   ================================================================ */
 :root {
-  --ayu-mint: #19C8B9;
-  --ayu-yellow: #F7CD67;
-  --ayu-orange: #E59266;
-  --ayu-ink: #725D42;
-  --ayu-dark: #794F27;
-  --ayu-muted: #9F927D;
-  --ayu-bg: #F8F8F0;
-  --ayu-card: #F7F3DF;
-  --ayu-border: #C4B89E;
-  --ayu-white: #FFFFFF;
-  --ayu-shadow-sm: 0 2px 4px rgba(61,52,40,0.06);
-  --ayu-shadow-md: 0 4px 20px rgba(61,52,40,0.06), 0 8px 24px rgba(61,52,40,0.03);
-  --ayu-radius-sm: 12px;
-  --ayu-radius-md: 20px;
-  --ayu-radius-lg: 24px;
-  --ayu-radius-pill: 50px;
+  --mint: #19C8B9; --yellow: #F7CD67; --orange: #E59266;
+  --ink: #725D42; --dark: #794F27; --muted: #9F927D;
+  --bg: #F8F8F0; --card-bg: #F7F3DF; --border: #C4B89E;
+  --white: #FFFFFF;
+  --shadow-sm: 0 2px 4px rgba(61,52,40,0.06);
+  --shadow-md: 0 4px 20px rgba(61,52,40,0.06), 0 8px 24px rgba(61,52,40,0.03);
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Nunito,'Noto Sans SC',sans-serif;font-size:16px;line-height:1.7;color:var(--ink);background:var(--bg);font-weight:500}
+::selection{background:var(--yellow);color:#5c4a1f}
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
 
-body {
-  font-family: Nunito, 'Noto Sans SC', sans-serif;
-  font-size: 16px; line-height: 1.7;
-  color: var(--ayu-ink);
-  background: var(--ayu-bg);
-  font-weight: 500;
-}
+.preview-bar{background:var(--mint);color:#fff;text-align:center;padding:10px;font-size:.72rem;font-weight:700;letter-spacing:1px}
+.preview-bar a{color:#fff}
 
-::selection { background: var(--ayu-yellow); color: #5c4a1f; }
+/* ================================================================
+   Layout #9 — Hero单栏纵向（中心辐射型）
+   ================================================================ */
+.hero-vertical{min-height:70vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 24px;text-align:center}
+.hero-avatar{width:clamp(100px,16vw,140px);height:clamp(100px,16vw,140px);border-radius:50%;border:3px solid var(--mint);overflow:hidden;margin:0 auto 24px;background:#e8f4d8}
+.hero-avatar img{width:100%;height:100%;object-fit:contain}
+.hero-vertical h1{font-family:'ZCOOL KuaiLe',cursive;font-size:clamp(2.2rem,5vw,3.2rem);color:var(--dark);margin-bottom:10px}
+.hero-vertical .hero-sub{font-size:.95rem;color:var(--muted);max-width:420px;margin:0 auto}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:20px}
+.hero-tags .htag{font-size:.7rem;font-weight:700;padding:5px 16px;border-radius:50px}
+.htag-mint{background:rgba(25,200,185,.13);color:var(--mint)}
+.htag-yellow{background:rgba(247,205,103,.28);color:#8a6918}
+.htag-orange{background:rgba(229,146,102,.18);color:#c46e3d}
 
-.container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+/* ================================================================
+   Component #2 — Section Header（数字+标题）
+   adapted for Ayu: ZCOOL KuaiLe + mint color
+   ================================================================ */
+.section-header{margin:clamp(56px,10vh,96px) 0 28px}
+.section-number{font-family:'ZCOOL KuaiLe',cursive;font-size:clamp(1.2rem,2.5vw,1.6rem);color:var(--mint);opacity:.35;display:block;margin-bottom:.25rem}
+.section-title{font-family:'ZCOOL KuaiLe',cursive;font-size:clamp(1.3rem,3vw,1.8rem);color:var(--dark)}
 
-/* ===== 预览标签栏 ===== */
-.preview-bar {
-  background: var(--ayu-mint); color: #fff;
-  text-align: center; padding: 10px;
-  font-size: 0.72rem; font-weight: 700; letter-spacing: 1px;
-}
-.preview-bar a { color: #fff; text-decoration: underline; }
+/* ================================================================
+   Component #14 — Filter标签栏
+   adapted for Ayu: mint active, warm style
+   ================================================================ */
+.filter-bar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px}
+.filter-tag{padding:8px 18px;border-radius:50px;font-size:.78rem;font-weight:700;background:var(--white);color:var(--ink);border:1.5px solid var(--border);cursor:pointer;transition:all .2s;font-family:Nunito,'Noto Sans SC',sans-serif}
+.filter-tag.active{color:#fff;background:var(--mint);border-color:var(--mint)}
+.filter-tag:hover:not(.active){border-color:var(--mint);color:var(--mint)}
 
-/* ===== HERO ===== */
-.hero {
-  text-align: center;
-  padding: clamp(60px, 10vh, 100px) 24px clamp(40px, 6vh, 64px);
-}
-.hero-avatar {
-  width: 88px; height: 88px;
-  border-radius: 50%; border: 3px solid var(--ayu-mint);
-  margin: 0 auto 20px; overflow: hidden; background: #e8f4d8;
-  display: flex; align-items: center; justify-content: center;
-}
-.hero-avatar img { width: 100%; height: 100%; object-fit: contain; }
-.hero h1 {
-  font-family: 'ZCOOL KuaiLe', cursive;
-  font-size: clamp(2rem, 5vw, 2.8rem);
-  color: var(--ayu-dark); margin-bottom: 8px;
-}
-.hero .hero-sub {
-  font-size: 0.95rem; color: var(--ayu-muted);
-  max-width: 400px; margin: 0 auto;
-}
+/* ================================================================
+   Layout #10 — 自适应卡片网格 (auto-fill)
+   + animal-island-ui Memo Card
+   ================================================================ */
+.auto-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px}
 
-/* ===== SECTION DIVIDER ===== */
-.section-head {
-  display: flex; align-items: center; gap: 14px;
-  margin: clamp(48px, 8vh, 80px) 0 24px;
-}
-.section-head .s-icon {
-  width: 40px; height: 40px; border-radius: var(--ayu-radius-sm);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.1rem; flex-shrink: 0;
-}
-.s-icon-mint  { background: rgba(25,200,185,0.15); }
-.s-icon-yellow { background: rgba(247,205,103,0.30); }
-.s-icon-orange { background: rgba(229,146,102,0.20); }
-.section-head h2 {
-  font-family: 'ZCOOL KuaiLe', cursive;
-  font-size: clamp(1.2rem, 3vw, 1.6rem);
-  color: var(--ayu-dark); white-space: nowrap;
-}
-.section-head .s-line { flex: 1; height: 2px; border-radius: 1px; }
-.s-line-mint  { background: linear-gradient(90deg, rgba(25,200,185,0.35), transparent); }
-.s-line-yellow { background: linear-gradient(90deg, rgba(247,205,103,0.45), transparent); }
-.s-line-orange { background: linear-gradient(90deg, rgba(229,146,102,0.35), transparent); }
+.memo-card{background:radial-gradient(circle at 20% 30%,rgba(255,255,255,.3) 0%,transparent 60%),linear-gradient(160deg,#fdf6f0 0%,#faf3e8 50%,#f5ecdd 100%);border-radius:14px;box-shadow:0 0 0 6px #fff,0 0 0 8px rgba(180,165,140,.15),0 3px 12px rgba(61,52,40,.1);position:relative;overflow:hidden;transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s;display:flex;flex-direction:column}
+.memo-card:hover{transform:scale(1.05) rotate(-1.5deg);box-shadow:0 0 0 6px #fff,0 0 0 8px rgba(180,165,140,.2),0 6px 24px rgba(61,52,40,.16);z-index:2}
+.memo-card::before{content:'✦';position:absolute;top:10px;right:12px;z-index:2;font-size:.9rem;color:rgba(114,93,66,.25);pointer-events:none}
+.memo-img{width:100%;height:140px;overflow:hidden;background:#e8f4d8;display:flex;align-items:center;justify-content:center;font-size:2.2rem;flex-shrink:0}
+.memo-body{padding:14px 16px 16px;flex:1;display:flex;flex-direction:column}
+.memo-body h4{font-family:Nunito,'Noto Sans SC',sans-serif;font-size:.88rem;font-weight:800;color:var(--dark);margin-bottom:8px}
+.memo-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px}
+.memo-date{font-size:.7rem;color:var(--muted);margin-top:auto}
 
-/* ===== PASSPORT CARD ===== */
-.passport-card {
-  background: var(--ayu-card); border-radius: var(--ayu-radius-md);
-  box-shadow: var(--ayu-shadow-sm); overflow: hidden; max-width: 520px;
-}
-.passport-header {
-  background: var(--ayu-mint); padding: 12px 22px;
-  display: flex; align-items: center; gap: 8px;
-}
-.passport-header .ph-icon { font-size: 1.1rem; }
-.passport-header .ph-label { color: #fff; font-family: 'ZCOOL KuaiLe', cursive; font-size: 0.85rem; }
-.passport-body { padding: 22px; }
-.passport-body p { font-size: 0.9rem; color: var(--ayu-ink); line-height: 1.7; }
+/* tags */
+.tag{font-size:.63rem;font-weight:700;padding:3px 10px;border-radius:50px;display:inline-block}
+.tag-mint{background:rgba(25,200,185,.13);color:var(--mint)}
+.tag-yellow{background:rgba(247,205,103,.28);color:#8a6918}
+.tag-orange{background:rgba(229,146,102,.2);color:#c46e3d}
 
-/* ===== GALLERY GROUP ===== */
-.gallery-group { margin-bottom: 36px; }
-.gallery-group-header {
-  display: flex; align-items: center; gap: 10px;
-  margin-bottom: 18px;
-}
-.gallery-group-header .g-dot {
-  width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
-}
-.g-dot-mint  { background: var(--ayu-mint); }
-.g-dot-yellow { background: var(--ayu-yellow); }
-.g-dot-orange { background: var(--ayu-orange); }
-.gallery-group-header h3 {
-  font-family: 'ZCOOL KuaiLe', cursive;
-  font-size: 1.05rem; color: var(--ayu-dark);
-}
-.gallery-group-header .g-count {
-  font-size: 0.68rem; color: var(--ayu-muted);
-  background: var(--ayu-white); padding: 3px 12px; border-radius: var(--ayu-radius-pill);
-  font-weight: 700;
-}
+/* empty card */
+.memo-card.empty{opacity:.45}
+.memo-card.empty .memo-img{background:#f0ede6;font-size:1.8rem}
+.memo-card.empty h4{color:var(--muted)}
 
-/* ===== MEMO CARD (animal-island-ui) ===== */
-.memo-grid { display: flex; gap: 18px; flex-wrap: wrap; }
-.memo-card {
-  width: 230px; flex-shrink: 0;
-  background:
-    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.3) 0%, transparent 60%),
-    linear-gradient(160deg, #fdf6f0 0%, #faf3e8 50%, #f5ecdd 100%);
-  border-radius: 14px;
-  box-shadow:
-    0 0 0 6px #fff,
-    0 0 0 8px rgba(180,165,140,0.15),
-    0 3px 12px rgba(61,52,40,0.10);
-  position: relative; overflow: hidden;
-  transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s;
-  display: flex; flex-direction: column;
-}
-.memo-card:hover {
-  transform: scale(1.05) rotate(-1.5deg);
-  box-shadow:
-    0 0 0 6px #fff,
-    0 0 0 8px rgba(180,165,140,0.2),
-    0 6px 24px rgba(61,52,40,0.16);
-  z-index: 2;
-}
-.memo-card::before {
-  content: '✦'; position: absolute; top: 10px; right: 12px; z-index: 2;
-  font-size: 0.9rem; color: rgba(114,93,66,0.25); pointer-events: none;
-}
-.memo-img {
-  width: 100%; height: 138px; overflow: hidden;
-  background: #e8f4d8; display: flex; align-items: center; justify-content: center;
-  font-size: 2.2rem; flex-shrink: 0;
-}
-.memo-body { padding: 12px 14px 14px; flex: 1; display: flex; flex-direction: column; }
-.memo-body h4 { font-family: Nunito, 'Noto Sans SC', sans-serif; font-size: 0.85rem; font-weight: 800; color: var(--ayu-dark); margin-bottom: 6px; }
-.memo-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 8px; }
-.memo-date { font-size: 0.7rem; color: var(--ayu-muted); margin-top: auto; }
+/* ================================================================
+   Component #1C — 标签卡片 (Tag Card)
+   adapted for Ayu: ZCOOL KuaiLe title, Nunito body, Ayu colors
+   ================================================================ */
+.tag-card{background:var(--white);border-radius:20px;padding:24px;box-shadow:var(--shadow-md);border:1px solid rgba(114,93,66,.04)}
+.tag-card .card-pill{display:inline-block;padding:4px 14px;border-radius:50px;font-size:.68rem;font-weight:700;margin-bottom:14px}
+.tag-card .card-pill--mint{background:rgba(25,200,185,.12);color:var(--mint)}
+.tag-card .card-pill--yellow{background:rgba(247,205,103,.28);color:#8a6918}
+.tag-card .card-title{font-family:'ZCOOL KuaiLe',cursive;font-size:1.1rem;font-weight:400;margin-bottom:8px;color:var(--dark)}
+.tag-card .card-desc{font-size:.85rem;color:var(--ink);line-height:1.7}
 
-/* Tags */
-.tag {
-  font-size: 0.63rem; font-weight: 700; padding: 3px 10px; border-radius: var(--ayu-radius-pill);
-  display: inline-block;
-}
-.tag-mint  { background: rgba(25,200,185,0.13); color: var(--ayu-mint); }
-.tag-yellow { background: rgba(247,205,103,0.28); color: #8a6918; }
-.tag-orange { background: rgba(229,146,102,0.20); color: #c46e3d; }
+/* ================================================================
+   Component #1E-C — 荧光笔高亮 (Highlighter)
+   adapted for Ayu: yellow highlight, warm text
+   ================================================================ */
+.quote-highlight{padding:24px 28px;position:relative}
+.quote-highlight .quote-title{font-family:'ZCOOL KuaiLe',cursive;font-size:1.15rem;color:var(--dark);margin-bottom:12px;display:inline;background:linear-gradient(to top,rgba(247,205,103,.5) 45%,transparent 45%);line-height:1.8;padding:2px 4px}
+.quote-highlight .quote-desc{font-size:.88rem;color:var(--ink);line-height:1.9;margin-top:16px}
 
-/* Empty card */
-.memo-card.empty { opacity: 0.45; }
-.memo-card.empty .memo-img { background: #f0ede6; font-size: 1.8rem; }
-.memo-card.empty h4 { color: var(--ayu-muted); }
+/* ================================================================
+   Component #12A — Do/Don't对比列表
+   adapted for Ayu: coral/mint instead of red/blue
+   ================================================================ */
+.compare-cards{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.compare-block{background:var(--white);border-radius:20px;padding:28px;box-shadow:var(--shadow-md)}
+.compare-header{display:flex;align-items:center;gap:8px;margin-bottom:20px;padding-bottom:14px;border-bottom:2px solid}
+.compare-block--dont .compare-header{border-color:var(--orange)}
+.compare-block--do .compare-header{border-color:var(--mint)}
+.compare-icon{font-size:1.3rem}
+.compare-label{font-family:'ZCOOL KuaiLe',cursive;font-size:1rem;color:var(--dark)}
+.compare-block--dont .compare-label{color:var(--orange)}
+.compare-block--do .compare-label{color:var(--mint)}
+.compare-block ul{list-style:none;padding:0;display:flex;flex-direction:column;gap:12px}
+.compare-block li{font-size:.85rem;color:var(--ink);padding-left:22px;position:relative;line-height:1.5}
+.compare-block--dont li::before{content:'×';position:absolute;left:0;color:var(--orange);font-weight:700;font-size:.9rem}
+.compare-block--do li::before{content:'✓';position:absolute;left:0;color:var(--mint);font-weight:700;font-size:.85rem}
 
-/* ===== CONTACT CARDS ===== */
-.contact-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 16px; }
-.contact-card {
-  background: var(--ayu-white); border-radius: var(--ayu-radius-md);
-  padding: 18px 20px; box-shadow: var(--ayu-shadow-md);
-  display: flex; align-items: center; gap: 12px;
-  text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
-  border: 1px solid rgba(114,93,66,0.04);
-}
-.contact-card:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(61,52,40,0.08); }
-.contact-card .cc-icon {
-  width: 42px; height: 42px; border-radius: var(--ayu-radius-sm);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.2rem; flex-shrink: 0;
-}
-.cc-icon-mint  { background: rgba(25,200,185,0.12); }
-.cc-icon-yellow { background: rgba(247,205,103,0.22); }
-.cc-icon-orange { background: rgba(229,146,102,0.16); }
-.contact-card .cc-label { font-size: 0.82rem; font-weight: 700; color: var(--ayu-dark); }
-.contact-card .cc-hint { font-size: 0.68rem; color: var(--ayu-muted); }
+/* ================================================================
+   Contact cards (adapted from #1C tag-card + icon-card)
+   ================================================================ */
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:16px}
+.contact-card{background:var(--white);border-radius:20px;padding:20px;box-shadow:var(--shadow-md);display:flex;align-items:center;gap:14px;text-decoration:none;transition:transform .2s,box-shadow .2s;border:1px solid rgba(114,93,66,.04)}
+.contact-card:hover{transform:translateY(-2px);box-shadow:0 6px 28px rgba(61,52,40,.1)}
+.cc-icon{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.cc-icon-mint{background:rgba(25,200,185,.12)}
+.cc-icon-orange{background:rgba(229,146,102,.16)}
+.cc-icon-yellow{background:rgba(247,205,103,.22)}
+.cc-label{font-size:.82rem;font-weight:700;color:var(--dark)}
+.cc-hint{font-size:.68rem;color:var(--muted)}
 
-/* ===== CONTENT CARD (通用) ===== */
-.content-card {
-  background: var(--ayu-white); border-radius: var(--ayu-radius-lg);
-  padding: 32px; box-shadow: var(--ayu-shadow-md);
-  border: 1px solid rgba(114,93,66,0.04);
-}
-.content-card h3 {
-  font-family: 'ZCOOL KuaiLe', cursive;
-  font-size: 1.15rem; color: var(--ayu-dark); margin-bottom: 10px;
-}
-.content-card p { font-size: 0.9rem; color: var(--ayu-ink); line-height: 1.7; }
+/* ================================================================
+   SEO file cards
+   ================================================================ */
+.seo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-top:12px}
+.seo-card{background:var(--white);border-radius:16px;padding:18px 20px;box-shadow:var(--shadow-sm)}
+.seo-card .seo-filename{font-family:'Fira Code',monospace;font-size:.82rem;font-weight:700;color:var(--mint);margin-bottom:6px}
+.seo-card .seo-desc{font-size:.75rem;color:var(--muted);line-height:1.5}
 
-/* ===== 改动对照表 ===== */
-.compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.compare-bad {
-  background: #fff8f8; border-radius: 18px; padding: 22px;
-  border: 2px solid #f0c8c8;
-}
-.compare-good {
-  background: #f2fdfa; border-radius: 18px; padding: 22px;
-  border: 2px solid #bfece4;
-}
-.compare-bad h4 { color: #c0392b; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; font-weight: 800; }
-.compare-good h4 { color: #0d7d6e; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; font-weight: 800; }
-.compare-bad ul, .compare-good ul { padding-left: 18px; line-height: 2; font-size: 0.82rem; }
+/* Search preview simulation */
+.search-preview{background:var(--white);border:1px solid #dadce0;border-radius:14px;padding:18px 20px;margin-top:16px}
+.search-preview .sp-url{font-size:.72rem;color:#1a0dab;margin-bottom:2px}
+.search-preview .sp-title{font-size:1.05rem;color:#1a0dab;font-weight:600;margin-bottom:4px;display:block}
+.search-preview .sp-desc{font-size:.82rem;color:#4d5156;line-height:1.5}
 
-/* ===== FOOTER ===== */
-.page-footer {
-  text-align: center; padding: 40px 0; color: var(--ayu-muted);
-  font-size: 0.78rem; border-top: 1px solid #e0ddd8; margin-top: 48px;
-}
+/* ================================================================
+   Footer
+   ================================================================ */
+.page-footer{text-align:center;padding:48px 0 40px;color:var(--muted);font-size:.78rem;border-top:1px solid #e0ddd8;margin-top:clamp(48px,8vh,80px)}
 
-/* ===== SEO PREVIEW CARD ===== */
-.seo-demo {
-  background: var(--ayu-card); border-radius: var(--ayu-radius-md);
-  padding: 20px 24px; box-shadow: var(--ayu-shadow-sm);
-  border: 1.5px solid var(--ayu-border);
-}
-.seo-demo .seo-label {
-  font-size: 0.65rem; color: var(--ayu-muted); letter-spacing: 2px;
-  text-transform: uppercase; font-weight: 700; margin-bottom: 12px;
-}
-.seo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.seo-item { background: var(--ayu-white); border-radius: var(--ayu-radius-sm); padding: 14px 16px; }
-.seo-item .seo-name { font-size: 0.68rem; font-weight: 700; color: var(--ayu-mint); margin-bottom: 4px; }
-.seo-item .seo-value { font-size: 0.78rem; color: var(--ayu-ink); word-break: break-all; }
-
-/* Search engine preview */
-.search-preview {
-  background: var(--ayu-white); border: 1px solid #dadce0;
-  border-radius: 12px; padding: 16px 18px; margin-top: 12px;
-}
-.search-preview .sp-url { font-size: 0.72rem; color: #1a0dab; margin-bottom: 2px; }
-.search-preview .sp-title {
-  font-size: 1.05rem; color: #1a0dab; font-weight: 600;
-  margin-bottom: 4px; text-decoration: none; display: block;
-}
-.search-preview .sp-desc { font-size: 0.82rem; color: #4d5156; line-height: 1.5; }
+/* responsive */
+@media(max-width:700px){.compare-cards{grid-template-columns:1fr}.auto-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
 <div class="preview-bar">
-  🐧 阿鱼小岛改进预览 · 对照原站：
-  <a href="https://yuanxuru-oss.github.io/Ayu-websites-pages/ayu-site/" target="_blank">原站</a>
+  🐧 改进预览 v2 · 用 ayu-design-system 组件库重建 ·
+  <a href="https://yuanxuru-oss.github.io/Ayu-websites-pages/ayu-site/" target="_blank">原站对比</a>
 </div>
 
 <div class="container">
 
-<!-- ===== HERO ===== -->
-<div class="hero">
+<!-- ============================================================
+     Layout #9 — Hero单栏纵向
+     ============================================================ -->
+<section class="hero-vertical">
   <div class="hero-avatar">
     <img src="https://yuanxuru-oss.github.io/Ayu-websites-pages/ayu-site/ayu-penguin.png" alt="阿鱼">
   </div>
   <h1>阿鱼的小岛</h1>
   <p class="hero-sub">插画师 / IP设计师 · 用温暖笔触讲非遗故事</p>
-</div>
-
-<!-- ===== SECTION 1: 关于阿鱼 ===== -->
-<div class="section-head">
-  <div class="s-icon s-icon-mint">🛂</div>
-  <h2>关于阿鱼</h2>
-  <div class="s-line s-line-mint"></div>
-</div>
-
-<div class="passport-card">
-  <div class="passport-header">
-    <span class="ph-icon">✈️</span>
-    <span class="ph-label">DODO AIRLINES · 岛民护照</span>
+  <div class="hero-tags">
+    <span class="htag htag-mint">插画师</span>
+    <span class="htag htag-yellow">IP设计</span>
+    <span class="htag htag-orange">非遗文化</span>
   </div>
-  <div class="passport-body">
-    <p>插画师 / 非遗文化创作者。用温暖的笔触讲述福建海洋故事，将传统文化融入现代IP设计。安静做事，作品说话。</p>
-  </div>
+</section>
+
+<!-- ============================================================
+     分区 1 — 关于阿鱼
+     Component #1C 标签卡片
+     ============================================================ -->
+<div class="section-header">
+  <span class="section-number">01</span>
+  <h2 class="section-title">关于阿鱼</h2>
 </div>
 
-<!-- ===== SECTION 2: 创作画廊 ===== -->
-<div class="section-head">
-  <div class="s-icon s-icon-yellow">🎨</div>
-  <h2>创作画廊</h2>
-  <div class="s-line s-line-yellow"></div>
+<div class="tag-card" style="max-width:560px;">
+  <span class="card-pill card-pill--mint">🛂 岛民护照</span>
+  <h3 class="card-title">DODO AIRLINES</h3>
+  <p class="card-desc">插画师 / 非遗文化创作者。用温暖的笔触讲述福建海洋故事，将传统文化融入现代IP设计。安静做事，作品说话。</p>
 </div>
 
-<!-- IP 设计 -->
-<div class="gallery-group">
-  <div class="gallery-group-header">
-    <div class="g-dot g-dot-mint"></div>
-    <h3>IP 设计</h3>
-    <span class="g-count">2 件</span>
-  </div>
-  <div class="memo-grid">
-    <div class="memo-card">
-      <div class="memo-img">🌟</div>
-      <div class="memo-body">
-        <h4>双子星·刺桐双子星</h4>
-        <div class="memo-tags"><span class="tag tag-mint">非遗</span><span class="tag tag-yellow">IP</span></div>
-        <div class="memo-date">2025.10</div>
-      </div>
-    </div>
-    <div class="memo-card">
-      <div class="memo-img">⛵</div>
-      <div class="memo-body">
-        <h4>丝路远航</h4>
-        <div class="memo-tags"><span class="tag tag-mint">插画</span><span class="tag tag-yellow">非遗</span><span class="tag tag-orange">IP</span></div>
-        <div class="memo-date">2025.10</div>
-      </div>
+<!-- ============================================================
+     分区 2 — 创作画廊
+     Component #14 Filter标签栏 + Layout #10 auto-grid
+     ============================================================ -->
+<div class="section-header">
+  <span class="section-number">02</span>
+  <h2 class="section-title">创作画廊</h2>
+</div>
+
+<div class="filter-bar">
+  <button class="filter-tag active">全部</button>
+  <button class="filter-tag">IP 设计</button>
+  <button class="filter-tag">插画</button>
+  <button class="filter-tag">非遗文化</button>
+</div>
+
+<div class="auto-grid">
+  <!-- 双子星 -->
+  <div class="memo-card" data-cat="ip">
+    <div class="memo-img">🌟</div>
+    <div class="memo-body">
+      <h4>双子星·刺桐双子星</h4>
+      <div class="memo-tags"><span class="tag tag-mint">非遗</span><span class="tag tag-yellow">IP</span></div>
+      <div class="memo-date">2025.10</div>
     </div>
   </div>
-</div>
-
-<!-- 插画 -->
-<div class="gallery-group">
-  <div class="gallery-group-header">
-    <div class="g-dot g-dot-yellow"></div>
-    <h3>插画</h3>
-    <span class="g-count">0 件</span>
-  </div>
-  <div class="memo-grid">
-    <div class="memo-card empty">
-      <div class="memo-img">🖌️</div>
-      <div class="memo-body">
-        <h4>更多创作中…</h4>
-        <div class="memo-date">coming soon</div>
-      </div>
+  <!-- 丝路远航 -->
+  <div class="memo-card" data-cat="ip">
+    <div class="memo-img">⛵</div>
+    <div class="memo-body">
+      <h4>丝路远航</h4>
+      <div class="memo-tags"><span class="tag tag-mint">插画</span><span class="tag tag-yellow">非遗</span><span class="tag tag-orange">IP</span></div>
+      <div class="memo-date">2025.10</div>
     </div>
   </div>
-</div>
-
-<!-- 非遗文化 -->
-<div class="gallery-group">
-  <div class="gallery-group-header">
-    <div class="g-dot g-dot-orange"></div>
-    <h3>非遗文化</h3>
-    <span class="g-count">0 件</span>
+  <!-- empty: 插画 -->
+  <div class="memo-card empty" data-cat="illust">
+    <div class="memo-img">🖌️</div>
+    <div class="memo-body"><h4>更多创作中…</h4><div class="memo-date">coming soon</div></div>
   </div>
-  <div class="memo-grid">
-    <div class="memo-card empty">
-      <div class="memo-img">🏮</div>
-      <div class="memo-body">
-        <h4>更多创作中…</h4>
-        <div class="memo-date">coming soon</div>
-      </div>
-    </div>
+  <!-- empty: 非遗 -->
+  <div class="memo-card empty" data-cat="heritage">
+    <div class="memo-img">🏮</div>
+    <div class="memo-body"><h4>更多创作中…</h4><div class="memo-date">coming soon</div></div>
   </div>
 </div>
 
-<!-- ===== SECTION 3: 找到阿鱼 ===== -->
-<div class="section-head">
-  <div class="s-icon s-icon-orange">📬</div>
-  <h2>找到阿鱼</h2>
-  <div class="s-line s-line-orange"></div>
+<!-- ============================================================
+     分区 3 — 找到阿鱼
+     ============================================================ -->
+<div class="section-header">
+  <span class="section-number">03</span>
+  <h2 class="section-title">找到阿鱼</h2>
 </div>
 
-<div class="contact-grid" style="margin-bottom:12px;">
-  <a class="contact-card" href="#">
-    <div class="cc-icon cc-icon-mint">📧</div>
-    <div><div class="cc-label">Email</div><div class="cc-hint">ayu@example.com</div></div>
-  </a>
-  <a class="contact-card" href="#">
-    <div class="cc-icon cc-icon-orange">📕</div>
-    <div><div class="cc-label">小红书</div><div class="cc-hint">@阿鱼</div></div>
-  </a>
-  <a class="contact-card" href="#">
-    <div class="cc-icon cc-icon-yellow">🐙</div>
-    <div><div class="cc-label">GitHub</div><div class="cc-hint">@yuanxuru-oss</div></div>
-  </a>
+<div class="contact-grid">
+  <a class="contact-card" href="#"><div class="cc-icon cc-icon-mint">📧</div><div><div class="cc-label">Email</div><div class="cc-hint">ayu@example.com</div></div></a>
+  <a class="contact-card" href="#"><div class="cc-icon cc-icon-orange">📕</div><div><div class="cc-label">小红书</div><div class="cc-hint">@阿鱼</div></div></a>
+  <a class="contact-card" href="#"><div class="cc-icon cc-icon-yellow">🐙</div><div><div class="cc-label">GitHub</div><div class="cc-hint">@yuanxuru-oss</div></div></a>
 </div>
 
-<!-- ===== SECTION 4: SEO 改进 ===== -->
-<div class="section-head">
-  <div class="s-icon s-icon-mint">🔍</div>
-  <h2>SEO 基础改进</h2>
-  <div class="s-line s-line-mint"></div>
+<!-- ============================================================
+     分区 4 — SEO 基础改进
+     Component #1E-C 荧光笔高亮
+     ============================================================ -->
+<div class="section-header">
+  <span class="section-number">04</span>
+  <h2 class="section-title">SEO 基础</h2>
 </div>
 
-<div class="content-card" style="margin-bottom:24px;">
-  <h3>📋 页面 Meta 标签</h3>
+<div class="quote-highlight" style="margin-bottom:8px;">
+  <span class="quote-title">新增 4 个文件 + Meta 标签，零破坏</span>
+  <p class="quote-desc">不动现有代码，只新增 SEO 基础设施。谷歌/Bing 能正确抓取、社交平台分享有卡片预览、浏览器标签有企鹅图标。</p>
+</div>
 
-  <div class="seo-grid" style="margin-top:14px;">
-    <div class="seo-item">
-      <div class="seo-name">Title</div>
-      <div class="seo-value">阿鱼 · Ayu — Welcome to My Island</div>
-    </div>
-    <div class="seo-item">
-      <div class="seo-name">Description</div>
-      <div class="seo-value">阿鱼（Ayu）的个人作品集网站。插画师、IP设计师，专注非遗文化与现代创意融合。</div>
-    </div>
-    <div class="seo-item">
-      <div class="seo-name">OG:title</div>
-      <div class="seo-value">阿鱼 Ayu | 插画师 · IP设计师</div>
-    </div>
-    <div class="seo-item">
-      <div class="seo-name">OG:image</div>
-      <div class="seo-value">ayu-penguin.png</div>
-    </div>
+<div class="seo-grid">
+  <div class="seo-card">
+    <div class="seo-filename">favicon 🐧</div>
+    <div class="seo-desc">浏览器标签页图标、手机桌面图标</div>
   </div>
+  <div class="seo-card">
+    <div class="seo-filename">404.html</div>
+    <div class="seo-desc">友好错误页，不显示 GitHub 默认白屏</div>
+  </div>
+  <div class="seo-card">
+    <div class="seo-filename">robots.txt</div>
+    <div class="seo-desc">告诉搜索引擎允许抓取 + sitemap 位置</div>
+  </div>
+  <div class="seo-card">
+    <div class="seo-filename">sitemap.xml</div>
+    <div class="seo-desc">网站地图，帮助 Google/Bing 收录</div>
+  </div>
+</div>
 
-  <p style="font-size:0.78rem;color:var(--ayu-muted);margin-top:18px;">👇 谷歌搜索结果预览：</p>
+<div class="tag-card" style="margin-top:20px;">
+  <span class="card-pill card-pill--mint">🔍 搜索结果预览</span>
   <div class="search-preview">
     <div class="sp-url">ayu-island.github.io › ayu-site</div>
     <span class="sp-title">阿鱼 Ayu | 插画师 · IP设计师 · 非遗文化创作者</span>
@@ -441,75 +309,67 @@ body {
   </div>
 </div>
 
-<div class="content-card" style="margin-bottom:24px;">
-  <h3>📁 新增文件</h3>
-  <table style="width:100%;border-collapse:collapse;font-size:0.82rem;margin-top:12px;">
-    <thead>
-      <tr style="border-bottom:1.5px solid #e0ddd8;">
-        <th style="text-align:left;padding:8px 12px;font-size:0.65rem;color:var(--ayu-muted);letter-spacing:1px;text-transform:uppercase;">文件</th>
-        <th style="text-align:left;padding:8px 12px;font-size:0.65rem;color:var(--ayu-muted);letter-spacing:1px;text-transform:uppercase;">作用</th>
-        <th style="text-align:center;padding:8px 12px;font-size:0.65rem;color:var(--ayu-muted);letter-spacing:1px;text-transform:uppercase;">风险</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr style="border-bottom:1px solid #f0ede6;">
-        <td style="padding:10px 12px;font-family:monospace;font-size:0.78rem;">favicon</td>
-        <td style="padding:10px 12px;">浏览器标签页图标 🐧</td>
-        <td style="padding:10px 12px;text-align:center;"><span class="tag tag-mint">零风险</span></td>
-      </tr>
-      <tr style="border-bottom:1px solid #f0ede6;">
-        <td style="padding:10px 12px;font-family:monospace;font-size:0.78rem;">404.html</td>
-        <td style="padding:10px 12px;">友好错误页</td>
-        <td style="padding:10px 12px;text-align:center;"><span class="tag tag-mint">零风险</span></td>
-      </tr>
-      <tr style="border-bottom:1px solid #f0ede6;">
-        <td style="padding:10px 12px;font-family:monospace;font-size:0.78rem;">robots.txt</td>
-        <td style="padding:10px 12px;">告诉搜索引擎怎么爬</td>
-        <td style="padding:10px 12px;text-align:center;"><span class="tag tag-mint">零风险</span></td>
-      </tr>
-      <tr>
-        <td style="padding:10px 12px;font-family:monospace;font-size:0.78rem;">sitemap.xml</td>
-        <td style="padding:10px 12px;">网站地图给 Google/Bing</td>
-        <td style="padding:10px 12px;text-align:center;"><span class="tag tag-mint">零风险</span></td>
-      </tr>
-    </tbody>
-  </table>
+<!-- ============================================================
+     Component #12A — Do/Don't 对比
+     ============================================================ -->
+<div class="section-header">
+  <span class="section-number">05</span>
+  <h2 class="section-title">改动对照</h2>
 </div>
 
-<!-- ===== 改动对照 ===== -->
-<div class="section-head">
-  <div class="s-icon s-icon-yellow">📋</div>
-  <h2>改动对照总览</h2>
-  <div class="s-line s-line-yellow"></div>
-</div>
-
-<div class="compare-grid" style="margin-bottom:48px;">
-  <div class="compare-bad">
-    <h4>❌ 原站</h4>
+<div class="compare-cards">
+  <div class="compare-block compare-block--dont">
+    <div class="compare-header">
+      <span class="compare-icon">❌</span>
+      <span class="compare-label">原站</span>
+    </div>
     <ul>
-      <li>画廊所有作品混在一起，无分类</li>
-      <li>没有分组标记和数量</li>
+      <li>画廊所有作品混在一起</li>
+      <li>无分类标签和筛选</li>
       <li>缺联系方式区块</li>
       <li>section 边界模糊</li>
-      <li>无 favicon / 404 / OG 标签</li>
+      <li>无 favicon / OG 标签</li>
       <li>搜索引擎抓不到有效信息</li>
     </ul>
   </div>
-  <div class="compare-good">
-    <h4>✅ 改进后</h4>
+  <div class="compare-block compare-block--do">
+    <div class="compare-header">
+      <span class="compare-icon">✅</span>
+      <span class="compare-label">改进后</span>
+    </div>
     <ul>
-      <li>画廊按 IP设计 / 插画 / 非遗 分组</li>
-      <li>每组彩色圆点 + 作品数标签</li>
+      <li>画廊可筛选：全部 / IP设计 / 插画 / 非遗</li>
+      <li>Filter标签栏快速切换分类</li>
       <li>新增「找到阿鱼」联系方式区</li>
-      <li>分区图标 + 渐变线清晰隔断</li>
+      <li>Section Header 数字+标题清晰分区</li>
       <li>favicon + 404 + robots + sitemap</li>
       <li>OG 标签 → 社交分享有卡片预览</li>
     </ul>
   </div>
 </div>
 
-<div class="page-footer">🐧 阿鱼的小岛 · 动森风治愈站点 · 品牌三色：薄荷绿 + 阳光黄 + 蜜柑橙</div>
+<div class="page-footer">
+  🐧 阿鱼的小岛 · 动森风治愈站点 · 品牌三色：薄荷绿 + 阳光黄 + 蜜柑橙
+</div>
 
 </div>
+
+<!-- Filter JS -->
+<script>
+document.querySelectorAll('.filter-tag').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.filter-tag').forEach(function(b){b.classList.remove('active')});
+    btn.classList.add('active');
+    var cat = btn.textContent.trim();
+    var cards = document.querySelectorAll('.memo-card[data-cat]');
+    cards.forEach(function(c){
+      if(cat==='全部'){c.style.display='';return}
+      var catMap = {'IP 设计':'ip','插画':'illust','非遗文化':'heritage'};
+      c.style.display = c.dataset.cat === catMap[cat] ? '' : 'none';
+    });
+  });
+});
+</script>
+
 </body>
 </html>
