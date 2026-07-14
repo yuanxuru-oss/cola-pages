@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ===== SEO 改进展示 ===== -->
+<title>阿鱼 Ayu | 插画师 · IP设计师 · 非遗文化创作者</title>
+<meta name="description" content="阿鱼（Ayu）的个人作品集网站。插画师、IP设计师，专注非遗文化与现代创意融合。动森小岛治愈风格。">
+<meta name="keywords" content="阿鱼,插画师,IP设计,非遗文化,动森,作品集,illustrator,designer">
+<meta name="author" content="阿鱼 Ayu">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph (社交分享) -->
+<meta property="og:title" content="阿鱼 Ayu | 插画师 · IP设计师">
+<meta property="og:description" content="用温暖笔触讲非遗故事。动森小岛风作品集。">
+<meta property="og:image" content="https://yuanxuru-oss.github.io/Ayu-websites-pages/ayu-site/assets/images/ayu-penguin.png">
+<meta property="og:url" content="https://yuanxuru-oss.github.io/Ayu-websites-pages/ayu-site/">
+<meta property="og:type" content="website">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="阿鱼 Ayu | 插画师 · IP设计师">
+<meta name="twitter:description" content="用温暖笔触讲非遗故事。动森小岛风作品集。">
+<meta name="twitter:image" content="https://yuanxuru-oss.github.io/Ayu-websites-pages/ayu-site/assets/images/ayu-penguin.png">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" sizes="32x32" href="https://yuanxuru-oss.github.io/Ayu-websites-pages/ayu-site/assets/images/ayu-penguin.png">
+<link rel="apple-touch-icon" href="https://yuanxuru-oss.github.io/Ayu-websites-pages/ayu-site/assets/images/ayu-penguin.png">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=ZCOOL+KuaiLe&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --mint: #19c8b9; --yellow: #f7cd67; --orange: #e59266;
+  --ink: #725d42; --dark: #794f27; --muted: #9f927d;
+  --bg: #f8f8f0;
+}
+
+body { font-family: Nunito,'Noto Sans SC',sans-serif; background: var(--bg); color: var(--ink); font-weight: 500; line-height: 1.6; }
+.container { max-width: 960px; margin: 0 auto; padding: 48px 24px; }
+
+.preview-bar { background: var(--mint); color: #fff; text-align: center; padding: 8px; font-size: 0.72rem; font-weight: 700; letter-spacing: 1px; }
+
+h1 { font-family: 'ZCOOL KuaiLe',cursive; font-size: 2.2rem; color: var(--dark); margin-bottom: 8px; }
+.sub { font-size: 0.92rem; color: var(--muted); margin-bottom: 48px; }
+
+/* Card */
+.card { background: #fff; border-radius: 20px; padding: 28px 32px; box-shadow: 0 4px 20px rgba(61,52,40,0.06); margin-bottom: 24px; }
+.card h2 { font-family: 'ZCOOL KuaiLe',cursive; font-size: 1.2rem; color: var(--dark); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.card h2 .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.card p { font-size: 0.88rem; margin-bottom: 8px; }
+.card code { background: #f0ede6; padding: 2px 8px; border-radius: 6px; font-size: 0.78rem; font-family: 'Fira Code',monospace; color: var(--dark); }
+.card .tag { display: inline-block; font-size: 0.65rem; font-weight: 700; padding: 2px 10px; border-radius: 50px; margin-left: 6px; }
+.tag-new { background: rgba(25,200,185,0.15); color: var(--mint); }
+.tag-miss { background: rgba(229,146,102,0.15); color: #c46e3d; }
+
+table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin-top: 12px; }
+th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid #e8e6e3; }
+th { font-size: 0.68rem; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; font-weight: 700; }
+td:last-child { text-align: center; }
+
+/* File box */
+.file-box { background: #faf8f3; border: 1.5px solid #e0ddd8; border-radius: 14px; padding: 18px 20px; margin-top: 8px; }
+.file-box .filename { font-family: 'Fira Code',monospace; font-size: 0.82rem; font-weight: 700; color: var(--mint); margin-bottom: 8px; }
+.file-box pre { font-size: 0.72rem; color: var(--ink); white-space: pre-wrap; font-family: 'Fira Code',monospace; line-height: 1.5; max-height: 200px; overflow-y: auto; }
+
+/* Search preview */
+.search-preview { background: #fff; border: 1px solid #dadce0; border-radius: 12px; padding: 16px; max-width: 600px; margin-top: 12px; }
+.search-preview .sp-url { font-size: 0.72rem; color: #1a0dab; margin-bottom: 2px; }
+.search-preview .sp-title { font-size: 1.1rem; color: #1a0dab; font-weight: 600; margin-bottom: 4px; text-decoration: none; display: block; }
+.search-preview .sp-desc { font-size: 0.82rem; color: #4d5156; line-height: 1.5; }
+
+.compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.compare-old { background: #fff3f3; border-radius: 16px; padding: 20px; border: 2px solid #fcc; }
+.compare-new { background: #f0fdf9; border-radius: 16px; padding: 20px; border: 2px solid #bfece4; }
+.compare-old h3 { color: #c0392b; font-size: 0.75rem; letter-spacing: 2px; margin-bottom: 10px; }
+.compare-new h3 { color: #0d7d6e; font-size: 0.75rem; letter-spacing: 2px; margin-bottom: 10px; }
+</style>
+</head>
+<body>
+
+<div class="preview-bar">🔍 SEO 基础改进预览 — 对照原站：<a href="https://yuanxuru-oss.github.io/Ayu-websites-pages/ayu-site/" style="color:#fff;">阿鱼的小岛</a></div>
+
+<div class="container">
+  <h1>SEO 基础改进</h1>
+  <p class="sub">让搜索引擎和社交平台正确识别你的网站</p>
+
+  <!-- ===== 1. 页面标题 + Meta ===== -->
+  <div class="card">
+    <h2><span class="dot" style="background:var(--mint);"></span> 1. 页面标题 & Meta 描述</h2>
+
+    <div class="compare-grid">
+      <div class="compare-old">
+        <h3>❌ 原站</h3>
+        <p style="font-size:0.82rem;"><code>&lt;title&gt;</code> 阿鱼 · Ayu — Welcome to My Island</p>
+        <p style="font-size:0.78rem;color:var(--muted);margin-top:6px;">没有 description、keywords、OG 标签</p>
+      </div>
+      <div class="compare-new">
+        <h3>✅ 改进后</h3>
+        <p style="font-size:0.82rem;"><code>&lt;title&gt;</code> 阿鱼 Ayu | 插画师 · IP设计师 · 非遗文化创作者</p>
+        <p style="font-size:0.78rem;color:var(--muted);margin-top:6px;">含 description、keywords、OG、Twitter Card</p>
+      </div>
+    </div>
+
+    <p style="font-size:0.78rem;color:var(--muted);margin-top:16px;">👇 谷歌搜索结果预览：</p>
+    <div class="search-preview">
+      <div class="sp-url">ayu-island.github.io › ayu-site</div>
+      <span class="sp-title">阿鱼 Ayu | 插画师 · IP设计师 · 非遗文化创作者</span>
+      <div class="sp-desc">阿鱼（Ayu）的个人作品集网站。插画师、IP设计师，专注非遗文化与现代创意融合。动森小岛治愈风格。</div>
+    </div>
+
+    <p style="font-size:0.78rem;color:var(--muted);margin-top:16px;">👇 微信/飞书/Twitter 分享卡片预览：</p>
+    <div style="display:flex;gap:16px;align-items:flex-start;margin-top:12px;background:#f0f4f8;border-radius:12px;padding:16px;">
+      <div style="width:48px;height:48px;border-radius:8px;overflow:hidden;flex-shrink:0;background:#e8f4d8;">
+        <img src="https://yuanxuru-oss.github.io/Ayu-websites-pages/ayu-site/assets/images/ayu-penguin.png" style="width:100%;height:100%;object-fit:contain;">
+      </div>
+      <div>
+        <div style="font-weight:700;font-size:0.85rem;color:var(--dark);">阿鱼 Ayu | 插画师 · IP设计师</div>
+        <div style="font-size:0.75rem;color:#555;">用温暖笔触讲非遗故事。动森小岛风作品集。</div>
+        <div style="font-size:0.68rem;color:#888;margin-top:2px;">ayu-island.github.io</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 2. Favicon ===== -->
+  <div class="card">
+    <h2><span class="dot" style="background:var(--yellow);"></span> 2. Favicon 网站图标</h2>
+    <table>
+      <tr><th>项目</th><th>原站</th><th>改进</th></tr>
+      <tr><td>浏览器标签图标</td><td><span class="tag tag-miss">缺失</span></td><td><span class="tag tag-new">新增</span></td></tr>
+      <tr><td>手机桌面图标</td><td><span class="tag tag-miss">缺失</span></td><td><span class="tag tag-new">新增</span></td></tr>
+    </table>
+    <p style="font-size:0.78rem;color:var(--muted);margin-top:12px;">只用一行 HTML：<code>&lt;link rel="icon" href="ayu-penguin.png"&gt;</code> — 企鹅头像直接当 favicon</p>
+  </div>
+
+  <!-- ===== 3. 404 页面 ===== -->
+  <div class="card">
+    <h2><span class="dot" style="background:var(--orange);"></span> 3. 404 页面</h2>
+    <p style="font-size:0.78rem;color:var(--muted);margin-bottom:12px;">访问不存在的路径时（如 /abc），GitHub Pages 默认白屏。加一个 404 页面：</p>
+    <div class="file-box">
+      <div class="filename">404.html</div>
+      <pre>页面效果：友好的企鹅提示 + "这个页面飘走了 🏝️" + 返回首页按钮</pre>
+    </div>
+    <p style="font-size:0.78rem;color:var(--muted);margin-top:12px;">
+      好处：访问者不会看到 GitHub 默认错误页，保持品牌一致性
+    </p>
+  </div>
+
+  <!-- ===== 4. robots.txt + sitemap ===== -->
+  <div class="card">
+    <h2><span class="dot" style="background:var(--mint);"></span> 4. robots.txt & sitemap.xml</h2>
+    <div class="file-box">
+      <div class="filename">robots.txt</div>
+      <pre>User-agent: *
+Allow: /
+Sitemap: https://yuanxuru-oss.github.io/Ayu-websites-pages/ayu-site/sitemap.xml</pre>
+    </div>
+    <div class="file-box" style="margin-top:12px;">
+      <div class="filename">sitemap.xml</div>
+      <pre>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"&gt;
+  &lt;url&gt;
+    &lt;loc&gt;https://yuanxuru-oss.github.io/Ayu-websites-pages/ayu-site/&lt;/loc&gt;
+    &lt;priority&gt;1.0&lt;/priority&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;https://yuanxuru-oss.github.io/Ayu-websites-pages/ayu-site/admin.html&lt;/loc&gt;
+    &lt;priority&gt;0.1&lt;/priority&gt;
+  &lt;/url&gt;
+&lt;/urlset&gt;</pre>
+    </div>
+    <p style="font-size:0.78rem;color:var(--muted);margin-top:12px;">
+      好处：告诉 Google/Bing 你的网站结构，帮助搜索引擎收录
+    </p>
+  </div>
+
+  <!-- ===== 改动总结 ===== -->
+  <div class="card" style="background: #f0fdf9; border: 2px solid #bfece4;">
+    <h2><span class="dot" style="background:var(--mint);"></span> 总结</h2>
+    <table>
+      <tr><th>文件</th><th>改动</th><th>风险</th></tr>
+      <tr><td>index.html <code>&lt;head&gt;</code></td><td>加 title/description/OG/favicon</td><td>🟢 零风险</td></tr>
+      <tr><td>404.html</td><td>新建 404 页面</td><td>🟢 零风险</td></tr>
+      <tr><td>robots.txt</td><td>新建</td><td>🟢 零风险</td></tr>
+      <tr><td>sitemap.xml</td><td>新建</td><td>🟢 零风险</td></tr>
+    </table>
+    <p style="font-size:0.78rem;color:var(--muted);margin-top:12px;">全部是新增文件 / 新增 meta 标签，不动任何现有代码，零破坏。</p>
+  </div>
+
+</div>
+</body>
+</html>
