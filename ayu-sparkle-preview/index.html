@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小巧思预览 — 鼠标星轨 + 明信片动画</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+<style>
+:root {
+  --mint: #19C8B9; --yellow: #F7CD67; --orange: #E59266;
+  --ink: #725D42; --dark: #794F27; --muted: #9F927D;
+  --bg: #F8F8F0; --card-bg: #F7F3DF;
+  --white: #FFFFFF;
+  --shadow-sm: 0 2px 4px rgba(61,52,40,.06);
+  --shadow-md: 0 4px 20px rgba(61,52,40,.06),0 8px 24px rgba(61,52,40,.03);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Nunito,'Noto Sans SC',sans-serif;font-size:16px;line-height:1.7;color:var(--ink);background:var(--bg);font-weight:500;overflow-x:hidden}
+::selection{background:var(--yellow);color:#5c4a1f}
+.container{max-width:900px;margin:0 auto;padding:0 24px}
+
+.preview-bar{background:var(--mint);color:#fff;text-align:center;padding:10px;font-size:.72rem;font-weight:700;letter-spacing:1px}
+
+/* ===== 页面内容 ===== */
+.hero{text-align:center;padding:64px 24px 40px}
+.hero h1{font-family:'ZCOOL KuaiLe',cursive;font-size:2rem;color:var(--dark);margin-bottom:6px}
+.hero .sub{font-size:.9rem;color:var(--muted);margin-bottom:32px}
+
+/* ============================================================
+   ✨ 效果 #4 — 鼠标拖尾小星星
+   ============================================================ */
+.sparkle{position:fixed;pointer-events:none;z-index:9999;animation:sparkleFade .8s ease-out forwards}
+@keyframes sparkleFade{
+  0%{opacity:1;transform:translate(0,0) scale(1) rotate(0deg)}
+  100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(0) rotate(var(--rot))}
+}
+
+/* ============================================================
+   📮 效果 #5 — 留言板明信片动画
+   ============================================================ */
+
+/* 护照留言墙 */
+.passport-wall{display:flex;flex-direction:column;gap:14px;max-width:500px;margin:0 auto 40px}
+
+/* 留言卡片 — 明信片风格 */
+.visitor-passport{
+  background:var(--card-bg);
+  border-radius:16px;
+  padding:18px 20px;
+  box-shadow:var(--shadow-sm);
+  position:relative;
+  display:flex;align-items:center;gap:14px;
+  /* 明信片入场动画 */
+  animation:postcardIn .6s cubic-bezier(.34,1.56,.64,1) both;
+  transform-origin:center center;
+}
+@keyframes postcardIn{
+  0%{opacity:0;transform:rotateY(90deg) translateY(20px) scale(.85)}
+  60%{opacity:1;transform:rotateY(-8deg) translateY(-4px) scale(1.02)}
+  100%{opacity:1;transform:rotateY(0deg) translateY(0) scale(1)}
+}
+
+/* 不同卡片延迟 */
+.visitor-passport:nth-child(1){animation-delay:0s}
+.visitor-passport:nth-child(2){animation-delay:.15s}
+.visitor-passport:nth-child(3){animation-delay:.3s}
+
+/* 明信片邮票 */
+.visitor-passport::after{
+  content:'✦';
+  position:absolute;top:12px;right:16px;
+  font-size:1rem;color:var(--orange);opacity:.6;
+  transform:rotate(15deg);
+}
+
+.vp-avatar{width:44px;height:44px;border-radius:50%;overflow:hidden;flex-shrink:0;border:2px solid var(--mint);background:#e8f4d8;display:flex;align-items:center;justify-content:center;font-size:1.4rem}
+.vp-avatar img{width:100%;height:100%;object-fit:contain}
+.vp-content{flex:1;min-width:0}
+.vp-name{font-size:.78rem;font-weight:700;color:var(--dark);margin-bottom:2px}
+.vp-msg{font-size:.78rem;color:var(--ink);line-height:1.5}
+.vp-time{font-size:.65rem;color:var(--muted);margin-top:4px}
+
+/* 输入区 */
+.passport-form{
+  background:var(--white);border-radius:20px;padding:24px;
+  box-shadow:var(--shadow-md);max-width:500px;margin:0 auto;
+  border:1px solid rgba(114,93,66,.04)
+}
+.passport-form label{font-size:.65rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;display:block;margin-bottom:6px}
+.passport-form input,.passport-form textarea{
+  width:100%;padding:12px 16px;border-radius:14px;
+  border:1.5px solid var(--border);background:var(--bg);
+  font-family:Nunito,'Noto Sans SC',sans-serif;font-size:.85rem;
+  color:var(--ink);margin-bottom:12px;resize:none;outline:none;
+  transition:border-color .2s;
+}
+.passport-form input:focus,.passport-form textarea:focus{border-color:var(--mint)}
+.passport-form textarea{min-height:60px}
+.passport-form .avatar-picker{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.passport-form .avatar-picker span{
+  width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;cursor:pointer;border:2px solid transparent;transition:all .2s;
+  background:var(--bg);
+}
+.passport-form .avatar-picker span:hover{border-color:var(--mint);transform:scale(1.15)}
+.passport-form .avatar-picker span.selected{border-color:var(--mint);background:rgba(25,200,185,.1)}
+.passport-form .btn-send{
+  padding:10px 24px;border-radius:50px;background:var(--mint);color:#fff;
+  border:none;font-weight:700;font-size:.82rem;cursor:pointer;
+  font-family:Nunito,'Noto Sans SC',sans-serif;
+  transition:transform .2s,box-shadow .2s;
+}
+.passport-form .btn-send:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(25,200,185,.3)}
+
+/* 发送成功微动效 */
+@keyframes stampPop{
+  0%{transform:scale(0);opacity:0}
+  50%{transform:scale(1.3);opacity:1}
+  100%{transform:scale(1);opacity:1}
+}
+.stamp-confirm{
+  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-size:2.5rem;z-index:999;pointer-events:none;
+  animation:stampPop .5s ease-out forwards;
+}
+
+/* ===== 分割线 ===== */
+.section-head{display:flex;align-items:center;gap:12px;margin:48px 0 20px}
+.section-head .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.dot-mint{background:var(--mint)}
+.dot-orange{background:var(--orange)}
+.section-head h2{font-family:'ZCOOL KuaiLe',cursive;font-size:1.2rem;color:var(--dark)}
+.section-head .line{flex:1;height:2px;border-radius:1px;background:linear-gradient(90deg,rgba(25,200,185,.3),transparent)}
+
+/* ===== 动手指引 ===== */
+.hint{text-align:center;font-size:.78rem;color:var(--muted);margin:32px 0 8px}
+.hint span{background:rgba(25,200,185,.12);color:var(--mint);padding:4px 14px;border-radius:50px;font-weight:700;font-size:.68rem}
+
+/* ===== 页面底部 ===== */
+.page-footer{text-align:center;padding:48px 0 40px;color:var(--muted);font-size:.78rem;border-top:1px solid #e0ddd8;margin-top:48px}
+
+@media(max-width:600px){.visitor-passport{margin:0 8px}}
+</style>
+</head>
+<body>
+
+<div class="preview-bar">✨ 小巧思预览 — #4 鼠标星轨 + #5 明信片动画</div>
+
+<div class="container">
+
+<div class="hero">
+  <h1>小巧思预览</h1>
+  <p class="sub">两个不动布局的小改动，让网站更有"活的感觉"</p>
+</div>
+
+<!-- ===== 效果 #4 ===== -->
+<div class="section-head">
+  <div class="dot dot-mint"></div>
+  <h2>✨ 效果 #4 — 鼠标拖尾小星星</h2>
+  <div class="line"></div>
+</div>
+
+<div class="hint">
+  在页面任意位置 <span>移动鼠标</span> 试试 → 会有薄荷绿 + 阳光黄小星星飘出
+</div>
+
+<div style="text-align:center;padding:32px;font-size:.82rem;color:var(--muted);">
+  <p>像动森里抓虫子时的 sparkle 特效 ✨</p>
+  <p style="font-size:.72rem;margin-top:8px;">移动鼠标越快，星星越多。5秒不动自动消失。</p>
+</div>
+
+<!-- ===== 效果 #5 ===== -->
+<div class="section-head">
+  <div class="dot dot-orange"></div>
+  <h2>📮 效果 #5 — 留言板明信片动画</h2>
+  <div class="line"></div>
+</div>
+
+<!-- 已有留言（带入场动画） -->
+<div class="passport-wall" id="passportWall">
+  <div class="visitor-passport">
+    <div class="vp-avatar">🐱</div>
+    <div class="vp-content">
+      <div class="vp-name">路过的小猫</div>
+      <div class="vp-msg">画风好温暖！月亮修补师太治愈了 🌙</div>
+      <div class="vp-time">2 小时前</div>
+    </div>
+  </div>
+  <div class="visitor-passport">
+    <div class="vp-avatar">🐻</div>
+    <div class="vp-content">
+      <div class="vp-name">泉州小熊</div>
+      <div class="vp-msg">刺桐双子星把闽南文化做活了！期待更多作品 ✨</div>
+      <div class="vp-time">昨天</div>
+    </div>
+  </div>
+  <div class="visitor-passport">
+    <div class="vp-avatar">🦊</div>
+    <div class="vp-content">
+      <div class="vp-name">设计狐</div>
+      <div class="vp-msg">金骐元宝的马年配色绝了，泉州非遗 yyds 🐴</div>
+      <div class="vp-time">3 天前</div>
+    </div>
+  </div>
+</div>
+
+<!-- 发留言表单 -->
+<div class="passport-form">
+  <label>写张明信片投进信箱 📮</label>
+  <input type="text" id="vpName" placeholder="你的名字" maxlength="20">
+  <div class="avatar-picker" id="avatarPicker">
+    <span data-avatar="🐱" class="selected">🐱</span>
+    <span data-avatar="🐻">🐻</span>
+    <span data-avatar="🦊">🦊</span>
+    <span data-avatar="🐧">🐧</span>
+    <span data-avatar="🐶">🐶</span>
+    <span data-avatar="🐸">🐸</span>
+    <span data-avatar="🐰">🐰</span>
+    <span data-avatar="🦉">🦉</span>
+  </div>
+  <textarea id="vpMsg" placeholder="写下你想说的话…" maxlength="200"></textarea>
+  <button class="btn-send" id="btnSend">🛫 投递明信片</button>
+</div>
+
+<div class="page-footer">🐧 以上效果增量不超过 60 行 JS + 40 行 CSS，不动现有结构</div>
+
+</div>
+
+<!-- ========== JS ========== -->
+<script>
+// ============================================================
+// ✨ 效果 #4 — 鼠标拖尾小星星
+// ============================================================
+(function(){
+  var lastX=0,lastY=0,lastTime=0,throttle=0;
+  var colors=['#19C8B9','#F7CD67','#E59266','#82D5BB','#F8A6B2'];
+  var shapes=['✦','✧','·','◆','⋆'];
+
+  function createSparkle(x,y){
+    var el=document.createElement('span');
+    el.className='sparkle';
+    el.textContent=shapes[Math.floor(Math.random()*shapes.length)];
+    el.style.cssText=[
+      'left:'+x+'px','top:'+y+'px',
+      'font-size:'+(8+Math.random()*10)+'px',
+      'color:'+colors[Math.floor(Math.random()*colors.length)],
+      '--dx:'+(Math.random()*40-20)+'px',
+      '--dy:'+(Math.random()*40-20)+'px',
+      '--rot:'+(Math.random()*180-90)+'deg'
+    ].join(';');
+    document.body.appendChild(el);
+    setTimeout(function(){el.remove()},800);
+  }
+
+  document.addEventListener('mousemove',function(e){
+    var now=Date.now();
+    var dist=Math.sqrt((e.clientX-lastX)**2+(e.clientY-lastY)**2);
+    if(dist>30&&now-lastTime>40){
+      createSparkle(e.clientX,e.clientY);
+      lastX=e.clientX;lastY=e.clientY;lastTime=now;
+    }
+  });
+})();
+
+// ============================================================
+// 📮 效果 #5 — 留言板明信片动画
+// ============================================================
+(function(){
+  var selectedAvatar='🐱';
+  document.getElementById('avatarPicker').addEventListener('click',function(e){
+    if(e.target.dataset.avatar){
+      document.querySelectorAll('#avatarPicker span').forEach(function(s){s.classList.remove('selected')});
+      e.target.classList.add('selected');
+      selectedAvatar=e.target.dataset.avatar;
+    }
+  });
+
+  document.getElementById('btnSend').addEventListener('click',function(){
+    var name=document.getElementById('vpName').value.trim();
+    var msg=document.getElementById('vpMsg').value.trim();
+    if(!name||!msg) return;
+
+    // Create new card with postcardIn animation
+    var card=document.createElement('div');
+    card.className='visitor-passport';
+    var now=new Date();
+    var timeStr='刚刚';
+    card.innerHTML=[
+      '<div class="vp-avatar">'+selectedAvatar+'</div>',
+      '<div class="vp-content">',
+        '<div class="vp-name">'+name+'</div>',
+        '<div class="vp-msg">'+msg+'</div>',
+        '<div class="vp-time">'+timeStr+'</div>',
+      '</div>'
+    ].join('');
+
+    // Insert at top
+    var wall=document.getElementById('passportWall');
+    wall.insertBefore(card,wall.firstChild);
+
+    // Stamp pop animation
+    var stamp=document.createElement('div');
+    stamp.className='stamp-confirm';
+    stamp.textContent='✉️';
+    document.body.appendChild(stamp);
+    setTimeout(function(){stamp.remove()},500);
+
+    // Clear form
+    document.getElementById('vpName').value='';
+    document.getElementById('vpMsg').value='';
+  });
+})();
+</script>
+
+</body>
+</html>
