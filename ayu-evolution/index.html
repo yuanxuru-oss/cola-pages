@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>阿鱼 · Ayu — Welcome to My Island</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+<style>
+:root {
+  --mint: #19C8B9; --yellow: #F7CD67; --orange: #E59266;
+  --ink: #725D42; --dark: #794F27; --muted: #9F927D;
+  --bg: #F8F8F0; --card-bg: #F7F3DF; --border: #C4B89E;
+  --white: #FFFFFF;
+  --shadow-sm: 0 2px 4px rgba(61,52,40,.06);
+  --shadow-md: 0 4px 20px rgba(61,52,40,.06),0 8px 24px rgba(61,52,40,.03);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Nunito,'Noto Sans SC',sans-serif;font-size:16px;line-height:1.7;color:var(--ink);background:var(--bg);font-weight:500}
+::selection{background:var(--yellow);color:#5c4a1f}
+.container{max-width:780px;margin:0 auto;padding:0 24px}
+.preview-bar{background:var(--mint);color:#fff;text-align:center;padding:10px;font-size:.72rem;font-weight:700;letter-spacing:1px}
+
+/* ================================================================
+   Hero
+   ================================================================ */
+.hero{text-align:center;padding:56px 24px 40px}
+.hero-emoji{font-size:2.8rem;margin-bottom:12px}
+.hero h1{font-family:'ZCOOL KuaiLe',cursive;font-size:2rem;color:var(--dark);margin-bottom:6px}
+.hero .sub{font-size:.9rem;color:var(--muted)}
+
+/* ================================================================
+   时间线
+   ================================================================ */
+.timeline{position:relative;padding-left:52px;margin:0 0 40px}
+.timeline::before{
+  content:'';position:absolute;left:22px;top:12px;bottom:12px;
+  width:2px;border-radius:1px;
+  background:linear-gradient(180deg,var(--mint) 0%,var(--mint) 28%,var(--yellow) 50%,var(--orange) 100%);
+}
+
+/* 版本卡 */
+.v-entry{position:relative;margin-bottom:30px}
+.v-entry:last-child{margin-bottom:0}
+
+/* 时间线节点 */
+.v-entry::before{
+  content:'';position:absolute;left:-37px;top:26px;
+  width:16px;height:16px;border-radius:50%;
+  border:3px solid var(--white);background:var(--mint);
+  box-shadow:0 0 0 3px var(--mint);
+}
+.v-entry.v1::before{background:var(--orange);box-shadow:0 0 0 3px var(--orange)}
+.v-entry.v2::before{background:var(--yellow);box-shadow:0 0 0 3px var(--yellow)}
+.v-entry.v3::before{width:20px;height:20px;left:-39px;top:24px;box-shadow:0 0 0 3px var(--mint);background:var(--mint)}
+
+/* 卡片本体 */
+.v-card{background:var(--white);border-radius:20px;padding:26px 30px;box-shadow:var(--shadow-md);border:1px solid rgba(114,93,66,.04)}
+.v-card.v3{border-top:3px solid var(--mint)}
+
+/* 版本号 + 日期行 */
+.v-meta{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+.v-badge{font-size:.68rem;font-weight:700;padding:4px 14px;border-radius:50px;display:inline-block}
+.v-badge.v3{background:rgba(25,200,185,.14);color:var(--mint)}
+.v-badge.v2{background:rgba(247,205,103,.26);color:#8a6918}
+.v-badge.v1{background:rgba(229,146,102,.18);color:#c46e3d}
+.v-badge--current{
+  font-size:.6rem;font-weight:700;padding:2px 10px;border-radius:50px;
+  background:var(--mint);color:#fff;
+}
+
+.v-year{font-size:.7rem;color:var(--muted);font-weight:600}
+
+/* 标题 */
+.v-card h3{font-family: Nunito,'Noto Sans SC',sans-serif;font-size:1.05rem;font-weight:800;color:var(--dark);margin-bottom:4px}
+
+/* 描述 */
+.v-summary{font-size:.84rem;color:var(--muted);line-height:1.6;margin-bottom:14px;padding-bottom:14px;border-bottom:1px dashed var(--border)}
+
+/* 更新条目 */
+.v-items{display:flex;flex-direction:column;gap:7px}
+.v-item{display:flex;align-items:baseline;gap:8px;font-size:.78rem;color:var(--ink)}
+.v-item .vi-icon{flex-shrink:0;font-size:.7rem;width:18px;text-align:center}
+.vi-add{color:var(--mint)}.vi-tune{color:var(--yellow)}.vi-fix{color:var(--orange)}
+
+/* ================================================================
+   底部彩蛋
+   ================================================================ */
+.footer-note{text-align:center;padding:0 0 48px}
+.footer-note p{font-size:.78rem;color:var(--muted);line-height:1.8}
+.footer-note .accent{color:var(--mint);font-weight:700}
+
+/* 响应式 */
+@media(max-width:600px){
+  .timeline{padding-left:40px}.timeline::before{left:16px}
+  .v-entry::before{left:-30px;width:12px;height:12px;top:28px}
+  .v-entry.v3::before{width:16px;height:16px;left:-32px;top:26px}
+  .v-card{padding:20px 18px}
+}
+</style>
+</head>
+<body>
+
+<div class="preview-bar">🏝️ 小岛进化史 · 独立预览</div>
+
+<div class="container">
+
+<div class="hero">
+  <div class="hero-emoji">🏝️</div>
+  <h1>小岛进化史</h1>
+  <p class="sub">从企鹅名片到 IP 完全体，每个版本都是和 Cola 一起搭建的</p>
+</div>
+
+<!-- ===== 时间线 ===== -->
+<div class="timeline">
+
+  <!-- Ver 3 -->
+  <div class="v-entry v3">
+    <div class="v-card v3">
+      <div class="v-meta">
+        <span class="v-badge v3">Ver 3</span>
+        <span class="v-badge--current">当前版本</span>
+        <span class="v-year">2026.07 · 持续更新</span>
+      </div>
+      <h3>🏝️ 动森小岛 · IP 完全体</h3>
+      <div class="v-summary">DODO 航空登岛动画 + 企鹅互动 + 画廊 + 工坊 + 竞赛 + 留言板。从名片进化为一整座岛。</div>
+      <div class="v-items">
+        <div class="v-item"><span class="vi-icon">🆕</span>金骐元宝、月亮修补师两件新作</div>
+        <div class="v-item"><span class="vi-icon">🆕</span>SEO 基础：favicon + OG 标签 + robots + sitemap</div>
+        <div class="v-item"><span class="vi-icon">🔄</span>文件结构整理，CSS/JS/HTML 分离</div>
+        <div class="v-item"><span class="vi-icon">🐛</span>动物语动物音修复恢复</div>
+        <div class="v-item"><span class="vi-icon">🆕</span>护照留言板 + 动森头像系统</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ver 2 -->
+  <div class="v-entry v2">
+    <div class="v-card">
+      <div class="v-meta">
+        <span class="v-badge v2">Ver 2</span>
+        <span class="v-year">2026.06</span>
+      </div>
+      <h3>🎨 画廊 + 作品系统上线</h3>
+      <div class="v-summary">作品不再只靠文字描述。拍立得风 Memo 卡片墙、独立详情弹窗、工坊项目区、竞赛挑战区。Animalese 动物语打字音效加入。</div>
+      <div class="v-items">
+        <div class="v-item"><span class="vi-icon">🆕</span>双子星·刺桐双子星、丝路远航作品</div>
+        <div class="v-item"><span class="vi-icon">🆕</span>工坊项目区 · 竞赛挑战区</div>
+        <div class="v-item"><span class="vi-icon">🆕</span>Animalese 动物语打字音效</div>
+        <div class="v-item"><span class="vi-icon">🔄</span>画廊 Memo 卡片 + 详情弹窗</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ver 1 -->
+  <div class="v-entry v1">
+    <div class="v-card">
+      <div class="v-meta">
+        <span class="v-badge v1">Ver 1</span>
+        <span class="v-year">2026.05</span>
+      </div>
+      <h3>🐧 企鹅名片 · 初代上岛</h3>
+      <div class="v-summary">第一版个人网页。DODO 航空登岛动画 + 企鹅名片 + 护照信息卡。NookPhone 13 色系统。从零到一的小岛。</div>
+      <div class="v-items">
+        <div class="v-item"><span class="vi-icon">🆕</span>DODO 航空登岛动画 + 打字机对话</div>
+        <div class="v-item"><span class="vi-icon">🆕</span>护照卡片 · 企鹅名片个人信息</div>
+        <div class="v-item"><span class="vi-icon">🆕</span>NookPhone 13 色设计系统</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer-note">
+  <p>以后每次大改，在上面加一张新卡片 ✨<br>
+  改动 <span class="accent">不超过 10 行 HTML</span>，轻松维护</p>
+</div>
+
+</div>
+</body>
+</html>
